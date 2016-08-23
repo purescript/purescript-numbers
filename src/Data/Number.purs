@@ -1,6 +1,8 @@
 -- | A module for working with PureScripts builtin `Number` type.
 module Data.Number
-  ( eqRelative
+  ( Fraction
+  , eqRelative
+  , Precision
   , eqAbsolute
   ) where
 
