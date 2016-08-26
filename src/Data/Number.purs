@@ -77,8 +77,10 @@ infix 4 neqApproximate as ≇
 -- | A(nother) type alias for (small) numbers.
 type Precision = Number
 
--- | Compare two `Number`s and return `true` if they are equal up to the given
--- | (absolute) precision. Note that this comparison is *not* scale-invariant.
+-- | Compare two `Number`s and return `true` if they are equal up to the
+-- | given (absolute) precision. Note that this type of comparison is *not*
+-- | scale-invariant. The relation induced by (eqAbsolute eps) is symmetric and
+-- | reflexive, but not transitive.
 -- |
 -- | Example:
 -- | ``` purs
