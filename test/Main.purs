@@ -2,8 +2,7 @@ module Test.Main where
 
 import Prelude
 
-import Data.Number (eqRelative, eqAbsolute)
-import Data.Number.Approximate (Approximate(..))
+import Data.Number (eqRelative, eqAbsolute, (≅), (≇))
 
 import Control.Monad.Aff.AVar (AVAR)
 import Control.Monad.Eff (Eff)
@@ -111,23 +110,14 @@ main = runTest do
         eqRelative 3.0 10.0 29.5
 
 
-  suite "Approximate" do
-    let x = Approximate 0.3
-        y = Approximate 0.2999999999
-        a = Approximate 0.1
-        b = Approximate 0.2
+  suite "eqApproximate" do
+    test "0.1 + 0.2 ≅ 0.3" do
+      assert "0.1 + 0.2 should be approximately equal to 0.3" $
+        0.1 + 0.2 ≅ 0.3
 
-    test "Eq instance" do
-      assert "should treat them as equal" $
-        x == y
+      assert "0.1 + 0.200001 should not be approximately equal to 0.3" $
+        0.1 + 0.200001 ≇ 0.3
 
-    test "Ord instance" do
-      assert "should also treat them as equal" $
-        x >= y && y >= x
-
-    test "Addition" do
-      assert "0.1 + 0.2 should be equal to 0.3 (with Approximate)" $
-        a + b == x
 
   suite "eqAbsolute" do
     test "eqAbsolute" do
