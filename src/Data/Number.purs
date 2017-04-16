@@ -1,6 +1,10 @@
 -- | A module for working with PureScripts builtin `Number` type.
 module Data.Number
   ( Fraction
+  , nan
+  , isNaN
+  , infinity
+  , isFinite
   , fromString
   , eqRelative
   , eqApproximate
@@ -16,8 +20,23 @@ import Prelude
 
 import Data.Maybe (Maybe(..))
 import Math (abs)
-import Global (readFloat, isFinite)
+import Global as G
 
+-- | Not a number (NaN).
+nan ∷ Number
+nan = G.nan
+
+-- | Test whether a `Number` is NaN.
+isNaN ∷ Number → Boolean
+isNaN = G.isNaN
+
+-- | Positive infinity.
+infinity ∷ Number
+infinity = G.infinity
+
+-- | Test whether a number is finite.
+isFinite ∷ Number → Boolean
+isFinite = G.isFinite
 
 -- | Attempt to parse a `Number` from a `String` using JavaScripts
 -- | `parseFloat`. Returns `Nothing` if the parse fails or if the result is not
@@ -41,11 +60,10 @@ import Global (readFloat, isFinite)
 -- | Nothing
 -- | ```
 fromString ∷ String → Maybe Number
-fromString = readFloat >>> check
+fromString = G.readFloat >>> check
   where
     check num | isFinite num = Just num
               | otherwise    = Nothing
-
 
 -- | A type alias for (small) numbers, typically in the range *[0:1]*.
 type Fraction = Number

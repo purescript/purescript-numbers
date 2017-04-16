@@ -3,7 +3,8 @@ module Test.Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Number (eqRelative, eqAbsolute, fromString, (≅), (≇))
+import Data.Number (nan, isNaN, infinity, isFinite, eqRelative, eqAbsolute,
+                    fromString, (≅), (≇))
 
 import Control.Monad.Aff.AVar (AVAR)
 import Control.Monad.Eff (Eff)
@@ -118,6 +119,21 @@ main = runTest do
 
       assert "0.1 + 0.200001 should not be approximately equal to 0.3" $
         0.1 + 0.200001 ≇ 0.3
+
+
+  suite "isNaN" do
+    test "Check for NaN" do
+      assert "NaN is not a number" $ isNaN nan
+      assertFalse "infinity is a number" $ isNaN infinity
+      assertFalse "1.0 is a number" $ isNaN 1.0
+
+
+  suite "isFinite" do
+    test "Check for infinity" do
+      assert "1.0e100 is a finite number" $ isFinite 1.0e100
+      assertFalse "detect positive infinity" $ isFinite infinity
+      assertFalse "detect negative infinity" $ isFinite (-infinity)
+      assertFalse "detect NaN" $ isFinite nan
 
 
   suite "fromString" do
