@@ -16,13 +16,7 @@ import Prelude
 
 import Data.Maybe (Maybe(..))
 import Math (abs)
-
-
-foreign import fromStringImpl
-  :: (forall a. a -> Maybe a)
-  -> (forall a. Maybe a)
-  -> String
-  -> Maybe Number
+import Global (readFloat, isFinite)
 
 
 -- | Attempt to parse a Number from a String using JavaScript's parseFloat.
@@ -41,8 +35,11 @@ foreign import fromStringImpl
 -- | > fromString "1.2e4"
 -- | (Just 12000.0)
 -- | ```
-fromString :: String -> Maybe Number
-fromString = fromStringImpl Just Nothing
+fromString ∷ String → Maybe Number
+fromString = readFloat >>> check
+  where
+    check num | isFinite num = Just num
+              | otherwise    = Nothing
 
 
 -- | A type alias for (small) numbers, typically in the range *[0:1]*.
