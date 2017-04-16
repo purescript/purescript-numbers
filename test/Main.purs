@@ -2,7 +2,8 @@ module Test.Main where
 
 import Prelude
 
-import Data.Number (eqRelative, eqAbsolute, (≅), (≇))
+import Data.Maybe (fromMaybe)
+import Data.Number (eqRelative, eqAbsolute, fromString, (≅), (≇))
 
 import Control.Monad.Aff.AVar (AVAR)
 import Control.Monad.Eff (Eff)
@@ -117,6 +118,25 @@ main = runTest do
 
       assert "0.1 + 0.200001 should not be approximately equal to 0.3" $
         0.1 + 0.200001 ≇ 0.3
+
+
+  suite "fromString" do
+    test "valid number string" do
+      assert "integer strings are coerced" $
+        fromMaybe false $ map (_ == 123.0) $ fromString "123"
+
+      assert "decimals are coerced" $
+        fromMaybe false $ map (_ == 12.34) $ fromString "12.34"
+
+      assert "exponents are coerced" $
+        fromMaybe false $ map (_ == 1e4) $ fromString "1e4"
+
+      assert "decimals exponents are coerced" $
+        fromMaybe false $ map (_ == 1.2e4) $ fromString "1.2e4"
+
+    test "invalid number string" do
+      assert "invalid strings are not coerced" $
+        fromMaybe true $ false <$ fromString "bad string"
 
 
   suite "eqAbsolute" do

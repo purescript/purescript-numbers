@@ -5,6 +5,7 @@ module Data.Number
   , eqApproximate
   , (~=)
   , (≅)
+  , fromString
   , neqApproximate
   , (≇)
   , Precision
@@ -13,7 +14,36 @@ module Data.Number
 
 import Prelude
 
+import Data.Maybe (Maybe(..))
 import Math (abs)
+
+
+foreign import fromStringImpl
+  :: (forall a. a -> Maybe a)
+  -> (forall a. Maybe a)
+  -> String
+  -> Maybe Number
+
+
+-- | Attempt to parse a Number from a String using JavaScript's parseFloat.
+-- |
+-- | Example:
+-- | ```purs
+-- | > fromString "123"
+-- | (Just 123.0)
+-- |
+-- | > fromString "12.34"
+-- | (Just 12.34)
+-- |
+-- | > fromString "1e4"
+-- | (Just 10000.0)
+-- |
+-- | > fromString "1.2e4"
+-- | (Just 12000.0)
+-- | ```
+fromString :: String -> Maybe Number
+fromString = fromStringImpl Just Nothing
+
 
 -- | A type alias for (small) numbers, typically in the range *[0:1]*.
 type Fraction = Number
