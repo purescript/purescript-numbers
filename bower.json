@@ -17,7 +17,8 @@
   ],
   "dependencies": {
     "purescript-math": "^2.0.0",
-    "purescript-globals": "^3.0.0"
+    "purescript-globals": "^3.0.0",
+    "purescript-maybe": "^3.0.0"
   },
   "devDependencies": {
     "purescript-console": "^3.0.0",
