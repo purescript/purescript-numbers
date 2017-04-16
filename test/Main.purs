@@ -2,7 +2,7 @@ module Test.Main where
 
 import Prelude
 
-import Data.Maybe (fromMaybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Number (eqRelative, eqAbsolute, fromString, (≅), (≇))
 
 import Control.Monad.Aff.AVar (AVAR)
@@ -136,7 +136,11 @@ main = runTest do
 
     test "invalid number string" do
       assert "invalid strings are not coerced" $
-        fromMaybe true $ false <$ fromString "bad string"
+        Nothing == fromString "bad string"
+
+    test "too large numbers" do
+      assert "too large numbers are not coerced" $
+        Nothing == fromString "1e1000"
 
 
   suite "eqAbsolute" do
