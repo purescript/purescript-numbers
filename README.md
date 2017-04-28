@@ -1,5 +1,5 @@
 # purescript-numbers
-Functions for working with PureScript's builtin `Number` type.
+Functions for working with PureScripts builtin `Number` type.
 
 ## Examples
 
