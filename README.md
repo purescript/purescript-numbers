@@ -28,7 +28,7 @@ true
 
 *NaN* and *infinity*:
 ``` purs
-> isNaN (asin 2.0)
+> isNaN (Math.asin 2.0)
 true
 
 > isFinite (1.0 / 0.0)
