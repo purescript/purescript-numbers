@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Number (Fraction(..), Precision(..), nan, isNaN, infinity,
+import Data.Number (Fraction(..), Tolerance(..), nan, isNaN, infinity,
                     isFinite, eqRelative, eqAbsolute, fromString, (≅), (≇))
 
 import Control.Monad.Aff.AVar (AVAR)
@@ -24,7 +24,7 @@ infix 1 eqRelative' as ~=
 
 -- | Comparison up to 0.1 absolute error.
 eqAbsolute' ∷ Number → Number → Boolean
-eqAbsolute' = eqAbsolute (Precision 0.1)
+eqAbsolute' = eqAbsolute (Tolerance 0.1)
 
 infix 1 eqAbsolute' as =~=
 
@@ -161,18 +161,18 @@ main = runTest do
 
   suite "eqAbsolute" do
     test "eqAbsolute" do
-      assert "should succeed for differences smaller than the precision" $
+      assert "should succeed for differences smaller than the tolerance" $
         10.0 =~= 10.09
 
-      assert "should succeed for differences smaller than the precision" $
+      assert "should succeed for differences smaller than the tolerance" $
         9.91 ~= 10.00
 
-      assertFalse "should fail for differences larger than the precision" $
+      assertFalse "should fail for differences larger than the tolerance" $
         10.0 =~= 10.11
 
-      assertFalse "should fail for differences larger than the precision" $
+      assertFalse "should fail for differences larger than the tolerance" $
         9.89 =~= 10.0
 
     test "eqAbsolute (compare against 0)" do
-      assert "should succeed for numbers smaller than the precision" $
+      assert "should succeed for numbers smaller than the tolerance" $
         0.0 ~= -0.09

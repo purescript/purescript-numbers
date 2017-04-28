@@ -8,7 +8,7 @@ module Data.Number
   , (≅)
   , neqApproximate
   , (≇)
-  , Precision(..)
+  , Tolerance(..)
   , eqAbsolute
   , nan
   , isNaN
@@ -72,13 +72,13 @@ newtype Fraction = Fraction Number
 -- |
 -- | Example:
 -- | ``` purs
--- | > (eqRelative 0.01) 133.7 133.0
+-- | > (eqRelative (Fraction 0.01)) 133.7 133.0
 -- | true
 -- |
--- | > (eqRelative 0.001) 133.7 133.0
+-- | > (eqRelative (Fraction 0.001)) 133.7 133.0
 -- | false
 -- |
--- | > (eqRelative 0.01) (0.1 + 0.2) 0.3
+-- | > (eqRelative (Fraction 0.01)) (0.1 + 0.2) 0.3
 -- | true
 -- | ```
 eqRelative ∷ Fraction → Number → Number → Boolean
@@ -89,7 +89,7 @@ eqRelative (Fraction frac)   x   y = abs (x - y) <= frac * abs (x + y) / 2.0
 -- | Test if two numbers are approximately equal, up to a relative difference
 -- | of one part in a million:
 -- | ``` purs
--- | eqApproximate = eqRelative 1.0e-6
+-- | eqApproximate = eqRelative (Fraction 1.0e-6)
 -- | ```
 -- |
 -- | Example
@@ -116,23 +116,23 @@ neqApproximate x y = not (x ≅ y)
 infix 4 neqApproximate as ≇
 
 -- | A newtype for (small) numbers. It is used as an argument for `eqAbsolute`.
-newtype Precision = Precision Number
+newtype Tolerance = Tolerance Number
 
--- | Compare two `Number`s and return `true` if they are equal up to the
--- | given (absolute) precision. Note that this type of comparison is *not*
--- | scale-invariant. The relation induced by (eqAbsolute eps) is symmetric and
--- | reflexive, but not transitive.
+-- | Compare two `Number`s and return `true` if they are equal up to the given
+-- | (absolute) tolerance value. Note that this type of comparison is *not*
+-- | scale-invariant. The relation induced by `(eqAbsolute (Tolerance eps))` is
+-- | symmetric and reflexive, but not transitive.
 -- |
 -- | Example:
 -- | ``` purs
--- | > (eqAbsolute 1.0) 133.7 133.0
+-- | > (eqAbsolute (Tolerance 1.0)) 133.7 133.0
 -- | true
 -- |
--- | > (eqAbsolute 0.1) 133.7 133.0
+-- | > (eqAbsolute (Tolerance 0.1)) 133.7 133.0
 -- | false
 -- | ```
-eqAbsolute ∷ Precision → Number → Number → Boolean
-eqAbsolute (Precision precision) x y = abs (x - y) <= precision
+eqAbsolute ∷ Tolerance → Number → Number → Boolean
+eqAbsolute (Tolerance tolerance) x y = abs (x - y) <= tolerance
 
 -- | Not a number (NaN).
 nan ∷ Number
