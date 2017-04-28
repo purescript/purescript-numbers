@@ -1,19 +1,19 @@
--- | A module for working with PureScripts builtin `Number` type.
+-- | Functions for working with PureScripts builtin `Number` type.
 module Data.Number
-  ( Fraction
-  , nan
-  , isNaN
-  , infinity
-  , isFinite
-  , fromString
+  ( fromString
+  , Fraction(..)
   , eqRelative
   , eqApproximate
   , (~=)
   , (≅)
   , neqApproximate
   , (≇)
-  , Precision
+  , Precision(..)
   , eqAbsolute
+  , nan
+  , isNaN
+  , infinity
+  , isFinite
   ) where
 
 import Prelude
@@ -21,22 +21,6 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Math (abs)
 import Global as G
-
--- | Not a number (NaN).
-nan ∷ Number
-nan = G.nan
-
--- | Test whether a `Number` is NaN.
-isNaN ∷ Number → Boolean
-isNaN = G.isNaN
-
--- | Positive infinity.
-infinity ∷ Number
-infinity = G.infinity
-
--- | Test whether a number is finite.
-isFinite ∷ Number → Boolean
-isFinite = G.isFinite
 
 -- | Attempt to parse a `Number` from a `String` using JavaScripts
 -- | `parseFloat`. Returns `Nothing` if the parse fails or if the result is not
@@ -65,8 +49,9 @@ fromString = G.readFloat >>> check
     check num | isFinite num = Just num
               | otherwise    = Nothing
 
--- | A type alias for (small) numbers, typically in the range *[0:1]*.
-type Fraction = Number
+-- | A newtype for (small) numbers, typically in the range *[0:1]*. It is used
+-- | as an argument for `eqRelative`.
+newtype Fraction = Fraction Number
 
 -- | Compare two `Number`s and return `true` if they are equal up to the
 -- | given *relative* error (`Fraction` parameter).
@@ -91,9 +76,9 @@ type Fraction = Number
 -- | true
 -- | ```
 eqRelative ∷ Fraction → Number → Number → Boolean
-eqRelative fraction 0.0   y =       abs y <= fraction
-eqRelative fraction   x 0.0 =       abs x <= fraction
-eqRelative fraction   x   y = abs (x - y) <= fraction * abs (x + y) / 2.0
+eqRelative (Fraction frac) 0.0   y =       abs y <= frac
+eqRelative (Fraction frac)   x 0.0 =       abs x <= frac
+eqRelative (Fraction frac)   x   y = abs (x - y) <= frac * abs (x + y) / 2.0
 
 -- | Test if two numbers are approximately equal, up to a relative difference
 -- | of one part in a million:
@@ -113,7 +98,7 @@ eqApproximate ∷ Number → Number → Boolean
 eqApproximate = eqRelative onePPM
   where
     onePPM ∷ Fraction
-    onePPM = 1.0e-6
+    onePPM = Fraction 1.0e-6
 
 infix 4 eqApproximate as ~=
 infix 4 eqApproximate as ≅
@@ -124,8 +109,8 @@ neqApproximate x y = not (x ≅ y)
 
 infix 4 neqApproximate as ≇
 
--- | A(nother) type alias for (small) numbers.
-type Precision = Number
+-- | A newtype for (small) numbers. It is used as an argument for `eqAbsolute`.
+newtype Precision = Precision Number
 
 -- | Compare two `Number`s and return `true` if they are equal up to the
 -- | given (absolute) precision. Note that this type of comparison is *not*
@@ -141,4 +126,20 @@ type Precision = Number
 -- | false
 -- | ```
 eqAbsolute ∷ Precision → Number → Number → Boolean
-eqAbsolute precision x y = abs (x - y) <= precision
+eqAbsolute (Precision precision) x y = abs (x - y) <= precision
+
+-- | Not a number (NaN).
+nan ∷ Number
+nan = G.nan
+
+-- | Test whether a `Number` is NaN.
+isNaN ∷ Number → Boolean
+isNaN = G.isNaN
+
+-- | Positive infinity.
+infinity ∷ Number
+infinity = G.infinity
+
+-- | Test whether a number is finite.
+isFinite ∷ Number → Boolean
+isFinite = G.isFinite

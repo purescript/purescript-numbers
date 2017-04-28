@@ -3,8 +3,8 @@ module Test.Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Number (nan, isNaN, infinity, isFinite, eqRelative, eqAbsolute,
-                    fromString, (≅), (≇))
+import Data.Number (Fraction(..), Precision(..), nan, isNaN, infinity,
+                    isFinite, eqRelative, eqAbsolute, fromString, (≅), (≇))
 
 import Control.Monad.Aff.AVar (AVAR)
 import Control.Monad.Eff (Eff)
@@ -18,13 +18,13 @@ import Test.Unit.Main (runTest)
 
 -- | Comparison up to 10% relative error.
 eqRelative' ∷ Number → Number → Boolean
-eqRelative' = eqRelative 0.1
+eqRelative' = eqRelative (Fraction 0.1)
 
 infix 1 eqRelative' as ~=
 
 -- | Comparison up to 0.1 absolute error.
 eqAbsolute' ∷ Number → Number → Boolean
-eqAbsolute' = eqAbsolute 0.1
+eqAbsolute' = eqAbsolute (Precision 0.1)
 
 infix 1 eqAbsolute' as =~=
 
@@ -102,14 +102,14 @@ main = runTest do
 
     test "eqRelative (fraction = 0.0)" do
       assert "should succeed if numbers are exactly equal" $
-        eqRelative 0.0 3.14 3.14
+        eqRelative (Fraction 0.0) 3.14 3.14
 
       assertFalse "should fail if numbers are not exactly equal" $
-        eqRelative 0.0 3.14 3.14000000000001
+        eqRelative (Fraction 0.0) 3.14 3.14000000000001
 
     test "eqRelative (fraction > 1.0)" do
       assert "should work for 'fractions' larger than one" $
-        eqRelative 3.0 10.0 29.5
+        eqRelative (Fraction 3.0) 10.0 29.5
 
 
   suite "eqApproximate" do
