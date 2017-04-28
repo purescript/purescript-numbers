@@ -22,9 +22,8 @@ import Data.Maybe (Maybe(..))
 import Math (abs)
 import Global as G
 
--- | Attempt to parse a `Number` from a `String` using JavaScripts
--- | `parseFloat`. Returns `Nothing` if the parse fails or if the result is not
--- | a finite number.
+-- | Attempt to parse a `Number` using JavaScripts `parseFloat`. Returns
+-- | `Nothing` if the parse fails or if the result is not a finite number.
 -- |
 -- | Example:
 -- | ```purs
@@ -42,6 +41,13 @@ import Global as G
 -- |
 -- | > fromString "bad"
 -- | Nothing
+-- | ```
+-- |
+-- | Note that `parseFloat` allows for trailing non-digit characters and
+-- | whitespace as a prefix:
+-- | ```
+-- | > fromString "  1.2 ??"
+-- | (Just 1.2)
 -- | ```
 fromString ∷ String → Maybe Number
 fromString = G.readFloat >>> check
