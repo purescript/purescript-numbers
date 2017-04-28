@@ -14,3 +14,13 @@ true
 > fromString "12.34"
 (Just 12.34)
 ```
+
+## Installation
+
+```
+bower install purescript-numbers
+```
+
+## Documentation
+
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-numbers).
