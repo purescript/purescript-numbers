@@ -1,4 +1,9 @@
 # purescript-numbers
+[![Latest release](http://img.shields.io/github/release/sharkdp/purescript-numbers.svg)](https://github.com/sharkdp/purescript-numbers/releases)
+[![Build status](https://travis-ci.org/sharkdp/purescript-numbers.svg?branch=master)](https://travis-ci.org/sharkdp/purescript-numbers)
+
+
+
 Functions for working with PureScripts builtin `Number` type.
 
 ## Examples
