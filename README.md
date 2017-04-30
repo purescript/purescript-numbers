@@ -2,7 +2,7 @@
 [![Latest release](http://img.shields.io/github/release/sharkdp/purescript-numbers.svg)](https://github.com/sharkdp/purescript-numbers/releases)
 [![Build status](https://travis-ci.org/sharkdp/purescript-numbers.svg?branch=master)](https://travis-ci.org/sharkdp/purescript-numbers)
 
-Functions for working with PureScripts builtin `Number` type.
+Utility functions for working with PureScripts builtin `Number` type.
 
 * [**Module documentation on Pursuit**](http://pursuit.purescript.org/packages/purescript-numbers).
 
@@ -17,13 +17,18 @@ Parsing:
 (Just 0.001)
 ```
 
-*NaN* and *infinity*:
+Formatting (`Data.Number.Format`):
 ``` purs
-> isNaN (Math.asin 2.0)
-true
+> let x = 1234.56789
 
-> isFinite (1.0 / 0.0)
-false
+> toStringWith (precision 6) x
+"1234.57"
+
+> toStringWith (fixed 3) x
+"1234.568"
+
+> toStringWith (exponential 2) x
+"1.23e+3"
 ```
 
 Approximate comparisons (`Data.Number.Approximate`):
@@ -33,6 +38,15 @@ false
 
 > 0.1 + 0.2 ≅ 0.3
 true
+```
+
+*NaN* and *infinity*:
+``` purs
+> isNaN (Math.asin 2.0)
+true
+
+> isFinite (1.0 / 0.0)
+false
 ```
 
 ## Installation

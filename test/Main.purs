@@ -4,6 +4,8 @@ import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Number (nan, isNaN, infinity, isFinite, fromString)
+import Data.Number.Format (precision, fixed, exponential, toStringWith,
+                           toString)
 import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
                                 eqAbsolute, (≅), (≇))
 
@@ -12,7 +14,7 @@ import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE)
 
 import Test.Unit (suite, test)
-import Test.Unit.Assert (assert, assertFalse)
+import Test.Unit.Assert (assert, assertFalse, equal)
 import Test.Unit.Console (TESTOUTPUT)
 import Test.Unit.Main (runTest)
 
@@ -70,6 +72,36 @@ main = runTest do
       assertFalse "detect negative infinity" $ isFinite (-infinity)
       assertFalse "detect NaN" $ isFinite nan
 
+
+  let pi = 3.14159
+  suite "Data.Format.toStringWith" do
+
+    test "precision" do
+      equal "3.14"    (toStringWith (precision 3) pi)
+      equal "3.1416"  (toStringWith (precision 5) pi)
+      equal "3"       (toStringWith (precision 1) pi)
+      equal "3"       (toStringWith (precision (-3)) pi)
+      equal "3.14"    (toStringWith (precision 3) pi)
+      equal "1.2e+3"  (toStringWith (precision 2) 1234.5)
+
+    test "fixed" do
+      equal "3.14"    (toStringWith (fixed 2) pi)
+      equal "3.1416"  (toStringWith (fixed 4) pi)
+      equal "3"       (toStringWith (precision 0) pi)
+      equal "3"       (toStringWith (precision (-3)) pi)
+      equal "1234.5"  (toStringWith (fixed 1) 1234.5)
+
+    test "exponential" do
+      equal "3e+0"    (toStringWith (exponential 0) pi)
+      equal "3.14e+0" (toStringWith (exponential 2) pi)
+      equal "3.14e+2" (toStringWith (exponential 2) (100.0 * pi))
+      equal "1.2e+3"  (toStringWith (exponential 1) 1234.5)
+
+  suite "Data.Format.toString" do
+
+    test "toString" do
+      equal "3.14159" (toString pi)
+      equal "10" (toString 10.0)
 
   suite "Data.Number.Approximate.eqRelative" do
     test "eqRelative" do
