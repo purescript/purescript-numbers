@@ -3,8 +3,9 @@ module Test.Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Number (Fraction(..), Tolerance(..), nan, isNaN, infinity,
-                    isFinite, eqRelative, eqAbsolute, fromString, (≅), (≇))
+import Data.Number (nan, isNaN, infinity, isFinite, fromString)
+import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
+                                eqAbsolute, (≅), (≇))
 
 import Control.Monad.Aff.AVar (AVAR)
 import Control.Monad.Eff (Eff)
@@ -31,7 +32,46 @@ infix 1 eqAbsolute' as =~=
 main ∷ Eff (console ∷ CONSOLE, testOutput ∷ TESTOUTPUT, avar ∷ AVAR) Unit
 main = runTest do
 
-  suite "eqRelative" do
+
+  suite "Data.Number.fromString" do
+    test "valid number string" do
+      assert "integer strings are coerced" $
+        fromMaybe false $ map (_ == 123.0) $ fromString "123"
+
+      assert "decimals are coerced" $
+        fromMaybe false $ map (_ == 12.34) $ fromString "12.34"
+
+      assert "exponents are coerced" $
+        fromMaybe false $ map (_ == 1e4) $ fromString "1e4"
+
+      assert "decimals exponents are coerced" $
+        fromMaybe false $ map (_ == 1.2e4) $ fromString "1.2e4"
+
+    test "invalid number string" do
+      assert "invalid strings are not coerced" $
+        Nothing == fromString "bad string"
+
+    test "too large numbers" do
+      assert "too large numbers are not coerced" $
+        Nothing == fromString "1e1000"
+
+
+  suite "Data.Number.isNaN" do
+    test "Check for NaN" do
+      assert "NaN is not a number" $ isNaN nan
+      assertFalse "infinity is a number" $ isNaN infinity
+      assertFalse "1.0 is a number" $ isNaN 1.0
+
+
+  suite "Data.Number.isFinite" do
+    test "Check for infinity" do
+      assert "1.0e100 is a finite number" $ isFinite 1.0e100
+      assertFalse "detect positive infinity" $ isFinite infinity
+      assertFalse "detect negative infinity" $ isFinite (-infinity)
+      assertFalse "detect NaN" $ isFinite nan
+
+
+  suite "Data.Number.Approximate.eqRelative" do
     test "eqRelative" do
       assert "should return true for differences smaller 10%" $
         10.0 ~= 10.9
@@ -112,7 +152,7 @@ main = runTest do
         eqRelative (Fraction 3.0) 10.0 29.5
 
 
-  suite "eqApproximate" do
+  suite "Data.Number.Approximate.eqApproximate" do
     test "0.1 + 0.2 ≅ 0.3" do
       assert "0.1 + 0.2 should be approximately equal to 0.3" $
         0.1 + 0.2 ≅ 0.3
@@ -121,45 +161,7 @@ main = runTest do
         0.1 + 0.200001 ≇ 0.3
 
 
-  suite "isNaN" do
-    test "Check for NaN" do
-      assert "NaN is not a number" $ isNaN nan
-      assertFalse "infinity is a number" $ isNaN infinity
-      assertFalse "1.0 is a number" $ isNaN 1.0
-
-
-  suite "isFinite" do
-    test "Check for infinity" do
-      assert "1.0e100 is a finite number" $ isFinite 1.0e100
-      assertFalse "detect positive infinity" $ isFinite infinity
-      assertFalse "detect negative infinity" $ isFinite (-infinity)
-      assertFalse "detect NaN" $ isFinite nan
-
-
-  suite "fromString" do
-    test "valid number string" do
-      assert "integer strings are coerced" $
-        fromMaybe false $ map (_ == 123.0) $ fromString "123"
-
-      assert "decimals are coerced" $
-        fromMaybe false $ map (_ == 12.34) $ fromString "12.34"
-
-      assert "exponents are coerced" $
-        fromMaybe false $ map (_ == 1e4) $ fromString "1e4"
-
-      assert "decimals exponents are coerced" $
-        fromMaybe false $ map (_ == 1.2e4) $ fromString "1.2e4"
-
-    test "invalid number string" do
-      assert "invalid strings are not coerced" $
-        Nothing == fromString "bad string"
-
-    test "too large numbers" do
-      assert "too large numbers are not coerced" $
-        Nothing == fromString "1e1000"
-
-
-  suite "eqAbsolute" do
+  suite "Data.Number.Approximate.eqAbsolute" do
     test "eqAbsolute" do
       assert "should succeed for differences smaller than the tolerance" $
         10.0 =~= 10.09
