@@ -9,13 +9,10 @@ import Data.Number.Format (precision, fixed, exponential, toStringWith,
 import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
                                 eqAbsolute, (≅), (≇))
 
-import Control.Monad.Aff.AVar (AVAR)
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE)
+import Effect (Effect)
 
 import Test.Unit (suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
-import Test.Unit.Console (TESTOUTPUT)
 import Test.Unit.Main (runTest)
 
 
@@ -31,7 +28,7 @@ eqAbsolute' = eqAbsolute (Tolerance 0.1)
 
 infix 1 eqAbsolute' as =~=
 
-main ∷ Eff (console ∷ CONSOLE, testOutput ∷ TESTOUTPUT, avar ∷ AVAR) Unit
+main ∷ Effect Unit
 main = runTest do
 
 

@@ -16,13 +16,12 @@
     "output"
   ],
   "dependencies": {
-    "purescript-math": "^2.0.0",
-    "purescript-globals": "^3.0.0",
-    "purescript-maybe": "^3.0.0"
+    "purescript-math": "#compiler/0.12",
+    "purescript-globals": "#compiler/0.12",
+    "purescript-maybe": "#compiler/0.12"
   },
   "devDependencies": {
-    "purescript-console": "^3.0.0",
-    "purescript-psci-support": "^3.0.0",
-    "purescript-test-unit": "^11.0.0"
+    "purescript-console": "#compiler/0.12",
+    "purescript-test-unit": "justinwoo/purescript-test-unit#compiler/0.12"
   }
 }
