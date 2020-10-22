@@ -10,7 +10,7 @@ import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
                                 eqAbsolute, (≅), (≇))
 
 import Effect (Effect)
-
+import Effect.Console (log)
 import Test.Assert (assertTrue', assertFalse', assertEqual)
 
 
@@ -30,8 +30,8 @@ main :: Effect Unit
 main = do
 
 
-  -- suite "Data.Number.fromString" do
-    -- test "valid number string" do
+  log "Data.Number.fromString"
+  log "\tvalid number string"
   assertTrue' "integer strings are coerced" $
     fromMaybe false $ map (_ == 123.0) $ fromString "123"
 
@@ -44,31 +44,31 @@ main = do
   assertTrue' "decimals exponents are coerced" $
     fromMaybe false $ map (_ == 1.2e4) $ fromString "1.2e4"
 
-    -- test "invalid number string" do
+  log "\tinvalid number string"
   assertTrue' "invalid strings are not coerced" $
     Nothing == fromString "bad string"
 
-    -- test "too large numbers" do
+  log "\ttoo large numbers"
   assertTrue' "too large numbers are not coerced" $
     Nothing == fromString "1e1000"
 
-  -- suite "Data.Number.isNaN" do
-    -- test "Check for NaN" do
+  log "Data.Number.isNaN"
+  log "\tCheck for NaN"
   assertTrue' "NaN is not a number" $ isNaN nan
   assertFalse' "infinity is a number" $ isNaN infinity
   assertFalse' "1.0 is a number" $ isNaN 1.0
 
-  -- suite "Data.Number.isFinite" do
-    -- test "Check for infinity" do
+  log "Data.Number.isFinite"
+  log "\tCheck for infinity"
   assertTrue' "1.0e100 is a finite number" $ isFinite 1.0e100
   assertFalse' "detect positive infinity" $ isFinite infinity
   assertFalse' "detect negative infinity" $ isFinite (-infinity)
   assertFalse' "detect NaN" $ isFinite nan
 
   let pi = 3.14159
-  -- suite "Data.Format.toStringWith" do
+  log "Data.Format.toStringWith"
 
-    -- test "precision" do
+  log "\tprecision"
   assertEqual
     { expected: "3.14"
     , actual: toStringWith (precision 3) pi
@@ -94,7 +94,7 @@ main = do
     , actual: toStringWith (precision 2) 1234.5
     }
 
-    -- test "fixed" do
+  log "\tfixed"
   assertEqual
     { expected: "3.14"
     , actual: toStringWith (fixed 2) pi
@@ -116,7 +116,7 @@ main = do
     , actual: toStringWith (fixed 1) 1234.5
     }
 
-    -- test "exponential" do
+  log "\texponential"
   assertEqual
     { expected: "3e+0"
     , actual: toStringWith (exponential 0) pi
@@ -134,9 +134,9 @@ main = do
     , actual: toStringWith (exponential 1) 1234.5
     }
 
-  -- suite "Data.Format.toString" do
+  log "Data.Format.toString"
 
-    -- test "toString" do
+  log "\ttoString"
   assertEqual
     { expected: "3.14159"
     , actual: toString pi
@@ -147,8 +147,8 @@ main = do
     , actual: toString 10.0
     }
 
-  -- suite "Data.Number.Approximate.eqRelative" do
-    -- test "eqRelative" do
+  log "Data.Number.Approximate.eqRelative"
+  log "\teqRelative"
   assertTrue' "should return true for differences smaller 10%" $
     10.0 ~= 10.9
 
@@ -161,7 +161,7 @@ main = do
   assertFalse' "should return false for differences larger than 10%" $
     10.0 ~= 9.01
 
-    -- test "eqRelative (large numbers)" do
+  log "\teqRelative (large numbers)"
   assertTrue' "should return true for differences smaller 10%" $
     100000000000.0 ~= 109000000000.0
 
@@ -174,7 +174,7 @@ main = do
   assertFalse' "should return false for differences larger than 10%" $
     100000000000.0 ~= 90000000000.0
 
-    -- test "eqRelative (small numbers)" do
+  log "\teqRelative (small numbers)"
   assertTrue' "should return true for differences smaller 10%" $
     0.000000000001 ~= 0.00000000000109
 
@@ -188,7 +188,7 @@ main = do
   assertFalse' "should return false for differences larger than 10%" $
     0.000000000001 ~= 0.0000000000009
 
-    -- test "eqRelative (negative numbers)" do
+  log "\teqRelative (negative numbers)"
   assertTrue' "should return true for differences smaller 10%" $
     -10.0 ~= -10.9
 
@@ -201,7 +201,7 @@ main = do
   assertFalse' "should return false for differences larger than 10%" $
     -10.0 ~= -9.01
 
-    -- test "eqRelative (close or equal to 0.0)" do
+  log "\teqRelative (close or equal to 0.0)"
   assertTrue' "should compare against the fraction if left argument is zero" $
     0.0 ~= 0.0001
 
@@ -217,20 +217,20 @@ main = do
   assertFalse' "should fail if other argument is not exactly zero" $
     1.0e-100 ~= 0.1
 
-    -- test "eqRelative (fraction = 0.0)" do
+  log "\teqRelative (fraction = 0.0)"
   assertTrue' "should succeed if numbers are exactly equal" $
     eqRelative (Fraction 0.0) 3.14 3.14
 
   assertFalse' "should fail if numbers are not exactly equal" $
     eqRelative (Fraction 0.0) 3.14 3.14000000000001
 
-    -- test "eqRelative (fraction > 1.0)" do
+  log "\teqRelative (fraction > 1.0)"
   assertTrue' "should work for 'fractions' larger than one" $
     eqRelative (Fraction 3.0) 10.0 29.5
 
 
-  -- suite "Data.Number.Approximate.eqApproximate" do
-  --   test "0.1 + 0.2 ≅ 0.3" do
+  log "Data.Number.Approximate.eqApproximate"
+  log "\t0.1 + 0.2 ≅ 0.3"
   assertTrue' "0.1 + 0.2 should be approximately equal to 0.3" $
     0.1 + 0.2 ≅ 0.3
 
@@ -238,8 +238,8 @@ main = do
     0.1 + 0.200001 ≇ 0.3
 
 
-  -- suite "Data.Number.Approximate.eqAbsolute" do
-  --   test "eqAbsolute" do
+  log "Data.Number.Approximate.eqAbsolute"
+  log "\teqAbsolute"
   assertTrue' "should succeed for differences smaller than the tolerance" $
     10.0 =~= 10.09
 
@@ -252,6 +252,6 @@ main = do
   assertFalse' "should fail for differences larger than the tolerance" $
     9.89 =~= 10.0
 
-    -- test "eqAbsolute (compare against 0)" do
+  log "\teqAbsolute (compare against 0)"
   assertTrue' "should succeed for numbers smaller than the tolerance" $
     0.0 ~= -0.09
