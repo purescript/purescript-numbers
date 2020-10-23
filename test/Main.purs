@@ -15,13 +15,13 @@ import Test.Assert (assertTrue', assertFalse', assertEqual)
 
 
 -- | Comparison up to 10% relative error.
-eqRelative' ∷ Number → Number → Boolean
+eqRelative' :: Number -> Number -> Boolean
 eqRelative' = eqRelative (Fraction 0.1)
 
 infix 1 eqRelative' as ~=
 
 -- | Comparison up to 0.1 absolute error.
-eqAbsolute' ∷ Number → Number → Boolean
+eqAbsolute' :: Number -> Number -> Boolean
 eqAbsolute' = eqAbsolute (Tolerance 0.1)
 
 infix 1 eqAbsolute' as =~=
