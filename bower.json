@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "purescript-console": "^4.2.0",
-    "purescript-test-unit": "^15.0.0"
+    "purescript-assert": "^4.1.0"
   }
 }
