@@ -30,9 +30,9 @@ module Data.Number.Format
 
 import Prelude
 
-foreign import toPrecisionNative ∷   Int → Number → String
-foreign import toFixedNative ∷       Int → Number → String
-foreign import toExponentialNative ∷ Int → Number → String
+foreign import toPrecisionNative ::   Int -> Number -> String
+foreign import toFixedNative ::       Int -> Number -> String
+foreign import toExponentialNative :: Int -> Number -> String
 
 -- | The `Format` data type specifies how a number will be formatted.
 data Format
@@ -42,21 +42,21 @@ data Format
 
 -- | Create a `toPrecision`-based format from an integer. Values smaller than
 -- | `1` and larger than `21` will be clamped.
-precision ∷ Int → Format
+precision :: Int -> Format
 precision = Precision <<< clamp 1 21
 
 -- | Create a `toFixed`-based format from an integer. Values smaller than `0`
 -- | and larger than `20` will be clamped.
-fixed ∷ Int → Format
+fixed :: Int -> Format
 fixed = Fixed <<< clamp 0 20
 
 -- | Create a `toExponential`-based format from an integer. Values smaller than
 -- | `0` and larger than `20` will be clamped.
-exponential ∷ Int → Format
+exponential :: Int -> Format
 exponential = Exponential <<< clamp 0 20
 
 -- | Convert a number to a string with a given format.
-toStringWith ∷ Format → Number → String
+toStringWith :: Format -> Number -> String
 toStringWith (Precision p)   = toPrecisionNative p
 toStringWith (Fixed p)       = toFixedNative p
 toStringWith (Exponential p) = toExponentialNative p
@@ -73,4 +73,4 @@ toStringWith (Exponential p) = toExponentialNative p
 -- | > toString 1.2e-10
 -- | "1.2e-10"
 -- | ```
-foreign import toString ∷ Number → String
+foreign import toString :: Number -> String

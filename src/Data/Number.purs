@@ -39,24 +39,24 @@ import Global as G
 -- | > fromString "  1.2 ??"
 -- | (Just 1.2)
 -- | ```
-fromString ∷ String → Maybe Number
+fromString :: String -> Maybe Number
 fromString = G.readFloat >>> check
   where
     check num | isFinite num = Just num
               | otherwise    = Nothing
 
 -- | Not a number (NaN).
-nan ∷ Number
+nan :: Number
 nan = G.nan
 
 -- | Test whether a `Number` is NaN.
-isNaN ∷ Number → Boolean
+isNaN :: Number -> Boolean
 isNaN = G.isNaN
 
 -- | Positive infinity.
-infinity ∷ Number
+infinity :: Number
 infinity = G.infinity
 
 -- | Test whether a number is finite.
-isFinite ∷ Number → Boolean
+isFinite :: Number -> Boolean
 isFinite = G.isFinite

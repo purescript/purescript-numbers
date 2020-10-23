@@ -41,7 +41,7 @@ newtype Fraction = Fraction Number
 -- | > (eqRelative (Fraction 0.01)) (0.1 + 0.2) 0.3
 -- | true
 -- | ```
-eqRelative ∷ Fraction → Number → Number → Boolean
+eqRelative :: Fraction -> Number -> Number -> Boolean
 eqRelative (Fraction frac) 0.0   y =       abs y <= frac
 eqRelative (Fraction frac)   x 0.0 =       abs x <= frac
 eqRelative (Fraction frac)   x   y = abs (x - y) <= frac * abs (x + y) / 2.0
@@ -60,17 +60,17 @@ eqRelative (Fraction frac)   x   y = abs (x - y) <= frac * abs (x + y) / 2.0
 -- | > 0.1 + 0.2 ≅ 0.3
 -- | true
 -- | ```
-eqApproximate ∷ Number → Number → Boolean
+eqApproximate :: Number -> Number -> Boolean
 eqApproximate = eqRelative onePPM
   where
-    onePPM ∷ Fraction
+    onePPM :: Fraction
     onePPM = Fraction 1.0e-6
 
 infix 4 eqApproximate as ~=
 infix 4 eqApproximate as ≅
 
 -- | The complement of `eqApproximate`.
-neqApproximate ∷ Number → Number → Boolean
+neqApproximate :: Number -> Number -> Boolean
 neqApproximate x y = not (x ≅ y)
 
 infix 4 neqApproximate as ≇
@@ -91,6 +91,6 @@ newtype Tolerance = Tolerance Number
 -- | > (eqAbsolute (Tolerance 0.1)) 133.7 133.0
 -- | false
 -- | ```
-eqAbsolute ∷ Tolerance → Number → Number → Boolean
+eqAbsolute :: Tolerance -> Number -> Number -> Boolean
 eqAbsolute (Tolerance tolerance) x y = abs (x - y) <= tolerance
 
