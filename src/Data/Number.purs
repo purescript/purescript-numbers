@@ -7,7 +7,6 @@ module Data.Number
   , isFinite
   , readInt
   , readFloat
-  , fromString
   , toFixed
   , toExponential
   , toPrecision
