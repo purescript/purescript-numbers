@@ -23,6 +23,12 @@ import Test.Assert (assert)
 
 main :: Effect Unit
 main = do
+  globalsTestCode
+
+-- Test code for the `purescript-globals` repo before its' Number-related
+-- code was moved into this repo
+globalsTestCode :: Effect Unit
+globalsTestCode = do
   let num = 12345.6789
 
   log "nan /= nan"
