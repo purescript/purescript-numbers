@@ -37,6 +37,7 @@ import Test.Assert (assertTrue', assertFalse', assertEqual)
 main :: Effect Unit
 main = do
   globalsTestCode
+  numbersTestCode
 
 -- Test code for the `purescript-globals` repo before its' Number-related
 -- code was moved into this repo
@@ -123,8 +124,8 @@ eqAbsolute' = eqAbsolute (Tolerance 0.1)
 
 infix 1 eqAbsolute' as =~=
 
-main :: Effect Unit
-main = do
+numbersTestCode :: Effect Unit
+numbersTestCode = do
 
 
   log "Data.Number.fromString"
