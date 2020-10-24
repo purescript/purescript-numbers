@@ -2,37 +2,20 @@ module Test.Main where
 
 import Prelude
 
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
 import Effect.Console (log)
 
-import Data.Number
-  ( readFloat
-  , readInt
-  , isFinite
-  , infinity
-  , nan
-  , isNaN
-  , toPrecision
-  , toExponential
-  , toFixed
-  )
-import Data.Number.Unsafe (unsafeToPrecision, unsafeToExponential, unsafeToFixed)
-
-import Test.Assert (assert)
-
-import Prelude
-
-import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Number (nan, isNaN, infinity, isFinite, fromString)
+import Data.Number (readFloat, readInt, isFinite, infinity,
+                    nan, isNaN, fromString,
+                    toPrecision, toExponential, toFixed)
 import Data.Number.Format (precision, fixed, exponential, toStringWith,
                            toString)
 import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
                                 eqAbsolute, (≅), (≇))
+import Data.Number.Unsafe (unsafeToPrecision, unsafeToExponential, unsafeToFixed)
 
-import Effect (Effect)
-import Effect.Console (log)
-import Test.Assert (assertTrue', assertFalse', assertEqual)
+import Test.Assert (assert, assertTrue', assertFalse', assertEqual)
 
 main :: Effect Unit
 main = do
