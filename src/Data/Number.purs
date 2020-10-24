@@ -63,7 +63,7 @@ foreign import readFloat :: String -> Number
 -- | (Just 1.2)
 -- | ```
 fromString :: String -> Maybe Number
-fromString = G.readFloat >>> check
+fromString = readFloat >>> check
   where
     check num | isFinite num = Just num
               | otherwise    = Nothing
