@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Console (log)
 
-import Global
+import Data.Number
   ( readFloat
   , readInt
   , isFinite
@@ -17,7 +17,7 @@ import Global
   , toExponential
   , toFixed
   )
-import Global.Unsafe (unsafeToPrecision, unsafeToExponential, unsafeToFixed)
+import Data.Number.Unsafe (unsafeToPrecision, unsafeToExponential, unsafeToFixed)
 
 import Test.Assert (assert)
 
