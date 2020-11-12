@@ -2,13 +2,13 @@
   "name": "purescript-numbers",
   "description": "Functions for working with Numbers",
   "license": "MIT",
-  "homepage": "https://github.com/sharkdp/purescript-numbers",
+  "homepage": "https://github.com/purescript/purescript-numbers",
   "authors": [
     "David Peter <mail@david-peter.de>"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/sharkdp/purescript-numbers.git"
+    "url": "git://github.com/purescript/purescript-numbers.git"
   },
   "ignore": [
     "**/.*",
@@ -17,8 +17,8 @@
   ],
   "dependencies": {
     "purescript-math": "master",
-    "purescript-globals": "master",
-    "purescript-maybe": "master"
+    "purescript-maybe": "master",
+    "purescript-functions": "master"
   },
   "devDependencies": {
     "purescript-console": "master",

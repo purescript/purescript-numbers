@@ -7,10 +7,20 @@ module Data.Number
   , isFinite
   ) where
 
-import Prelude
-
+import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
-import Global as G
+
+-- | Not a number (NaN)
+foreign import nan :: Number
+
+-- | Test whether a number is NaN
+foreign import isNaN :: Number -> Boolean
+
+-- | Positive infinity
+foreign import infinity :: Number
+
+-- | Test whether a number is finite
+foreign import isFinite :: Number -> Boolean
 
 -- | Attempt to parse a `Number` using JavaScripts `parseFloat`. Returns
 -- | `Nothing` if the parse fails or if the result is not a finite number.
@@ -40,23 +50,6 @@ import Global as G
 -- | (Just 1.2)
 -- | ```
 fromString :: String -> Maybe Number
-fromString = G.readFloat >>> check
-  where
-    check num | isFinite num = Just num
-              | otherwise    = Nothing
+fromString str = runFn4 fromStringImpl str isFinite Just Nothing
 
--- | Not a number (NaN).
-nan :: Number
-nan = G.nan
-
--- | Test whether a `Number` is NaN.
-isNaN :: Number -> Boolean
-isNaN = G.isNaN
-
--- | Positive infinity.
-infinity :: Number
-infinity = G.infinity
-
--- | Test whether a number is finite.
-isFinite :: Number -> Boolean
-isFinite = G.isFinite
+foreign import fromStringImpl :: Fn4 String (Number -> Boolean) (forall a. a -> Maybe a) (forall a. Maybe a) (Maybe Number)

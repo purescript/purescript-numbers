@@ -3,16 +3,49 @@ module Test.Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Number (nan, isNaN, infinity, isFinite, fromString)
-import Data.Number.Format (precision, fixed, exponential, toStringWith,
-                           toString)
-import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
-                                eqAbsolute, (≅), (≇))
-
 import Effect (Effect)
 import Effect.Console (log)
-import Test.Assert (assertTrue', assertFalse', assertEqual)
 
+import Data.Number (isFinite, infinity,nan, isNaN, fromString)
+import Data.Number.Format (precision, fixed, exponential, toStringWith, toString)
+import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative, eqAbsolute, (≅), (≇))
+
+import Test.Assert (assert, assertTrue', assertFalse', assertEqual)
+
+main :: Effect Unit
+main = do
+  globalsTestCode
+  numbersTestCode
+
+-- Test code for the `purescript-globals` repo before its' Number-related
+-- code was moved into this repo
+globalsTestCode :: Effect Unit
+globalsTestCode = do
+  let num = 12345.6789
+
+  log "nan /= nan"
+  assert $ nan /= nan
+
+  log "not (isNaN 6.0)"
+  assert $ not (isNaN 6.0)
+
+  log "isNaN nan"
+  assert $ isNaN nan
+
+  log "infinity > 0.0"
+  assert $ infinity > 0.0
+
+  log "-infinity < 0.0"
+  assert $ -infinity < 0.0
+
+  log "not (isFinite infinity)"
+  assert $ not (isFinite infinity)
+
+  log "isFinite 0.0"
+  assert $ isFinite 0.0
+
+-- Test code originally in this repo before parts of deprecated
+-- `purescript-globals` repo was moved to this repo.
 
 -- | Comparison up to 10% relative error.
 eqRelative' :: Number -> Number -> Boolean
@@ -26,8 +59,8 @@ eqAbsolute' = eqAbsolute (Tolerance 0.1)
 
 infix 1 eqAbsolute' as =~=
 
-main :: Effect Unit
-main = do
+numbersTestCode :: Effect Unit
+numbersTestCode = do
 
 
   log "Data.Number.fromString"
