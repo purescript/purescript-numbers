@@ -7,7 +7,6 @@ module Data.Number
   , isFinite
   ) where
 
-import Prelude
 import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
 
