@@ -5,9 +5,6 @@ module Data.Number
   , isNaN
   , infinity
   , isFinite
-  , toFixed
-  , toExponential
-  , toPrecision
   ) where
 
 import Prelude
@@ -57,29 +54,3 @@ fromString :: String -> Maybe Number
 fromString str = runFn4 fromStringImpl str isFinite Just Nothing
 
 foreign import fromStringImpl :: Fn4 String (Number -> Boolean) (forall a. a -> Maybe a) (forall a. Maybe a) (Maybe Number)
-
-foreign import _toFixed :: forall a. Fn4 (String -> a) (String -> a) Int Number a
-
-foreign import _toExponential :: forall a. Fn4 (String -> a) (String -> a) Int Number a
-
-foreign import _toPrecision :: forall a. Fn4 (String -> a) (String -> a) Int Number a
-
--- | Formats Number as a String with limited number of digits after the dot.
--- | May return `Nothing` when specified number of digits is less than 0 or
--- | greater than 20. See ECMA-262 for more information.
-toFixed :: Int -> Number -> Maybe String
-toFixed digits n = runFn4 _toFixed (const Nothing) Just digits n
-
--- | Formats Number as String in exponential notation limiting number of digits
--- | after the decimal dot. May return `Nothing` when specified number of
--- | digits is less than 0 or greater than 20 depending on the implementation.
--- | See ECMA-262 for more information.
-toExponential :: Int -> Number -> Maybe String
-toExponential digits n = runFn4 _toExponential (const Nothing) Just digits n
-
--- | Formats Number as String in fixed-point or exponential notation rounded
--- | to specified number of significant digits. May return `Nothing` when
--- | precision is less than 1 or greater than 21 depending on the
--- | implementation. See ECMA-262 for more information.
-toPrecision :: Int -> Number -> Maybe String
-toPrecision digits n = runFn4 _toPrecision (const Nothing) Just digits n

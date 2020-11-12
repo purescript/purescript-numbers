@@ -7,8 +7,7 @@ import Effect (Effect)
 import Effect.Console (log)
 
 import Data.Number (isFinite, infinity,
-                    nan, isNaN, fromString,
-                    toPrecision, toExponential, toFixed)
+                    nan, isNaN, fromString)
 import Data.Number.Format (precision, fixed, exponential, toStringWith,
                            toString)
 import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
@@ -65,23 +64,6 @@ globalsTestCode = do
 
   log $ "unsafeToPrecision 6" <> (show num) <> " == \"12345.7\""
   assert $ unsafeToPrecision 6 num == "12345.7"
-
-  -- note the rounding
-  log $ "toFixed 1" <> (show num) <> " == (Just \"12345.7\")"
-  assert $ toFixed 1 num == Just "12345.7"
-
-  -- padded with zeros
-  log $ "toFixed 6" <> (show num) <> " == (Just \"12345.678900\")"
-  assert $ toFixed 6 num == Just "12345.678900"
-
-  log $ "toExponential 4" <> (show num) <> " == (Just \"1.2346e+4\")"
-  assert $ toExponential 4 num == Just "1.2346e+4"
-
-  log $ "toPrecision 3" <> (show num) <> " == (Just \"1.23e+4\")"
-  assert $ toPrecision 3 num == Just "1.23e+4"
-
-  log $ "toPrecision 6" <> (show num) <> " == (Just \"12345.7\")"
-  assert $ toPrecision 6 num == Just "12345.7"
 
 -- Test code originally in this repo before parts of deprecated
 -- `purescript-globals` repo was moved to this repo.

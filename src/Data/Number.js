@@ -17,18 +17,3 @@ exports.fromStringImpl = function(str, isFinite, just, nothing) {
     return nothing;
   }
 };
-
-var formatNumber = function (format) {
-  return function (fail, succ, digits, n) {
-    try {
-      return succ(n[format](digits));
-    }
-    catch (e) {
-      return fail(e.message);
-    }
-  };
-};
-
-exports._toFixed = formatNumber("toFixed");
-exports._toExponential = formatNumber("toExponential");
-exports._toPrecision = formatNumber("toPrecision");
