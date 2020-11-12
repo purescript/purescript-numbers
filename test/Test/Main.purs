@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
 import Effect.Console (log)
 
-import Data.Number (readFloat, readInt, isFinite, infinity,
+import Data.Number (readFloat, isFinite, infinity,
                     nan, isNaN, fromString,
                     toPrecision, toExponential, toFixed)
 import Data.Number.Format (precision, fixed, exponential, toStringWith,
@@ -48,12 +48,6 @@ globalsTestCode = do
 
   log "isFinite 0.0"
   assert $ isFinite 0.0
-
-  log "readInt 16 \"0xFF\" == 255.0"
-  assert $ readInt 16 "0xFF" == 255.0
-
-  log "readInt 10 \"3.5\" == 3.0"
-  assert $ readInt 10 "3.5" == 3.0
 
   log "readFloat \"3.5\" == 3.5"
   assert $ readFloat "3.5" == 3.5
