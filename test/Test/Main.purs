@@ -6,7 +6,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
 import Effect.Console (log)
 
-import Data.Number (readFloat, isFinite, infinity,
+import Data.Number (isFinite, infinity,
                     nan, isNaN, fromString,
                     toPrecision, toExponential, toFixed)
 import Data.Number.Format (precision, fixed, exponential, toStringWith,
@@ -48,9 +48,6 @@ globalsTestCode = do
 
   log "isFinite 0.0"
   assert $ isFinite 0.0
-
-  log "readFloat \"3.5\" == 3.5"
-  assert $ readFloat "3.5" == 3.5
 
   -- note the rounding
   log $ "unsafeToFixed 1" <> (show num) <> " == \"12345.7\""

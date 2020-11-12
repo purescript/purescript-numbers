@@ -9,7 +9,14 @@ exports.infinity = Infinity;
 
 exports.isFinite = isFinite;
 
-exports.readFloat = parseFloat;
+exports.fromStringImpl = function(str, isFinite, just, nothing) {
+  var num = parseFloat(str);
+  if (isFinite(num)) {
+    return just(num);
+  } else {
+    return nothing;
+  }
+};
 
 var formatNumber = function (format) {
   return function (fail, succ, digits, n) {

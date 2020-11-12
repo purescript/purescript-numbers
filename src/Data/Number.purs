@@ -5,7 +5,6 @@ module Data.Number
   , isNaN
   , infinity
   , isFinite
-  , readFloat
   , toFixed
   , toExponential
   , toPrecision
@@ -26,9 +25,6 @@ foreign import infinity :: Number
 
 -- | Test whether a number is finite
 foreign import isFinite :: Number -> Boolean
-
--- | Parse a floating point value from a `String`
-foreign import readFloat :: String -> Number
 
 -- | Attempt to parse a `Number` using JavaScripts `parseFloat`. Returns
 -- | `Nothing` if the parse fails or if the result is not a finite number.
@@ -58,10 +54,9 @@ foreign import readFloat :: String -> Number
 -- | (Just 1.2)
 -- | ```
 fromString :: String -> Maybe Number
-fromString = readFloat >>> check
-  where
-    check num | isFinite num = Just num
-              | otherwise    = Nothing
+fromString str = runFn4 fromStringImpl str isFinite Just Nothing
+
+foreign import fromStringImpl :: Fn4 String (Number -> Boolean) (forall a. a -> Maybe a) (forall a. Maybe a) (Maybe Number)
 
 foreign import _toFixed :: forall a. Fn4 (String -> a) (String -> a) Int Number a
 
