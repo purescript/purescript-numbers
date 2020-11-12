@@ -12,7 +12,6 @@ import Data.Number.Format (precision, fixed, exponential, toStringWith,
                            toString)
 import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
                                 eqAbsolute, (≅), (≇))
-import Data.Number.Unsafe (unsafeToPrecision, unsafeToExponential, unsafeToFixed)
 
 import Test.Assert (assert, assertTrue', assertFalse', assertEqual)
 
@@ -47,23 +46,6 @@ globalsTestCode = do
 
   log "isFinite 0.0"
   assert $ isFinite 0.0
-
-  -- note the rounding
-  log $ "unsafeToFixed 1" <> (show num) <> " == \"12345.7\""
-  assert $ unsafeToFixed 1 num == "12345.7"
-
-  -- padded with zeros
-  log $ "unsafeToFixed 6" <> (show num) <> " == \"12345.678900\""
-  assert $ unsafeToFixed 6 num == "12345.678900"
-
-  log $ "unsafeToExponential 4" <> (show num) <> " == \"1.2346e+4\""
-  assert $ unsafeToExponential 4 num == "1.2346e+4"
-
-  log $ "unsafeToPrecision 3" <> (show num) <> " == \"1.23e+4\""
-  assert $ unsafeToPrecision 3 num == "1.23e+4"
-
-  log $ "unsafeToPrecision 6" <> (show num) <> " == \"12345.7\""
-  assert $ unsafeToPrecision 6 num == "12345.7"
 
 -- Test code originally in this repo before parts of deprecated
 -- `purescript-globals` repo was moved to this repo.
