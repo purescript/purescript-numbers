@@ -6,12 +6,9 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Effect (Effect)
 import Effect.Console (log)
 
-import Data.Number (isFinite, infinity,
-                    nan, isNaN, fromString)
-import Data.Number.Format (precision, fixed, exponential, toStringWith,
-                           toString)
-import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative,
-                                eqAbsolute, (≅), (≇))
+import Data.Number (isFinite, infinity,nan, isNaN, fromString)
+import Data.Number.Format (precision, fixed, exponential, toStringWith, toString)
+import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative, eqAbsolute, (≅), (≇))
 
 import Test.Assert (assert, assertTrue', assertFalse', assertEqual)
 
