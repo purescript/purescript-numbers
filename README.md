@@ -1,6 +1,6 @@
 # purescript-numbers
 [![Latest release](http://img.shields.io/github/release/sharkdp/purescript-numbers.svg)](https://github.com/sharkdp/purescript-numbers/releases)
-[![Build status](https://travis-ci.org/sharkdp/purescript-numbers.svg?branch=master)](https://travis-ci.org/sharkdp/purescript-numbers)
+[![Build status](https://github.com/purescript/purescript-numbers/workflows/CI/badge.svg?branch=master)](https://github.com/purescript/purescript-numbers/actions?query=workflow%3ACI+branch%3Amaster)
 
 Utility functions for working with PureScripts builtin `Number` type.
 
@@ -52,7 +52,7 @@ false
 ## Installation
 
 ```
-bower install purescript-numbers
+spago install numbers
 ```
 
 
