@@ -1,8 +1,8 @@
 # purescript-numbers
 
-[![Latest release](http://img.shields.io/github/release/purescript/purescript-prelude.svg)](https://github.com/purescript/purescript-prelude/releases)
-[![Build status](https://github.com/purescript/purescript-prelude/workflows/CI/badge.svg?branch=master)](https://github.com/purescript/purescript-prelude/actions?query=workflow%3ACI+branch%3Amaster)
-[![Pursuit](https://pursuit.purescript.org/packages/purescript-prelude/badge)](https://pursuit.purescript.org/packages/purescript-prelude)
+[![Latest release](http://img.shields.io/github/release/purescript/purescript-numbers.svg)](https://github.com/purescript/purescript-numbers/releases)
+[![Build status](https://github.com/purescript/purescript-numbers/workflows/CI/badge.svg?branch=master)](https://github.com/purescript/purescript-numbers/actions?query=workflow%3ACI+branch%3Amaster)
+[![Pursuit](https://pursuit.purescript.org/packages/purescript-numbers/badge)](https://pursuit.purescript.org/packages/purescript-numbers)
 
 Utility functions for working with PureScripts builtin `Number` type.
 
