@@ -1,15 +1,22 @@
 # purescript-numbers
-[![Latest release](http://img.shields.io/github/release/sharkdp/purescript-numbers.svg)](https://github.com/sharkdp/purescript-numbers/releases)
-[![Build status](https://github.com/purescript/purescript-numbers/workflows/CI/badge.svg?branch=master)](https://github.com/purescript/purescript-numbers/actions?query=workflow%3ACI+branch%3Amaster)
+
+[![Latest release](http://img.shields.io/github/release/purescript/purescript-prelude.svg)](https://github.com/purescript/purescript-prelude/releases)
+[![Build status](https://github.com/purescript/purescript-prelude/workflows/CI/badge.svg?branch=master)](https://github.com/purescript/purescript-prelude/actions?query=workflow%3ACI+branch%3Amaster)
+[![Pursuit](https://pursuit.purescript.org/packages/purescript-prelude/badge)](https://pursuit.purescript.org/packages/purescript-prelude)
 
 Utility functions for working with PureScripts builtin `Number` type.
 
-* [**Module documentation on Pursuit**](http://pursuit.purescript.org/packages/purescript-numbers).
+## Installation
+
+```
+spago install numbers
+```
 
 ## Examples
 
 Parsing:
-``` purs
+
+```purs
 > fromString "12.34"
 (Just 12.34)
 
@@ -18,7 +25,8 @@ Parsing:
 ```
 
 Formatting (`Data.Number.Format`):
-``` purs
+
+```purs
 > let x = 1234.56789
 
 > toStringWith (precision 6) x
@@ -32,7 +40,8 @@ Formatting (`Data.Number.Format`):
 ```
 
 Approximate comparisons (`Data.Number.Approximate`):
-``` purs
+
+```purs
 > 0.1 + 0.2 == 0.3
 false
 
@@ -40,8 +49,9 @@ false
 true
 ```
 
-*NaN* and *infinity*:
-``` purs
+_NaN_ and _infinity_:
+
+```purs
 > isNaN (Math.asin 2.0)
 true
 
@@ -49,10 +59,6 @@ true
 false
 ```
 
-## Installation
+## Documentation
 
-```
-spago install numbers
-```
-
-
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-numbers).
