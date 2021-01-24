@@ -20,7 +20,7 @@ Other improvements:
 
 ## [v7.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v7.0.0) - 2019-07-07
 
-- Updated for PureScript 0.13 (@justinwoo)
+- Updated for PureScript 0.13 (@sharkdp)
 
 ## [v6.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v6.0.0) - 2018-05-27
 
