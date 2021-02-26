@@ -12,15 +12,13 @@ Bugfixes:
 
 Other improvements:
 
-## [v7.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v7.0.0) - 2021-02-26
+## [v8.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v7.0.0) - 2021-02-26
 
 Breaking changes:
 - Added support for PureScript 0.14 and dropped support for all previous versions (#11)
 
 New features:
 - Ported `Number`-related code from deprecated `purescript-globals` into this repo (#12)
-
-Bugfixes:
 
 Other improvements:
 - Replaced unicode symbols with ascii characters (#11)
