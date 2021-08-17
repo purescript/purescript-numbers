@@ -5,10 +5,40 @@ module Data.Number
   , isNaN
   , infinity
   , isFinite
+  , Radians
+  , abs
+  , acos
+  , asin
+  , atan
+  , atan2
+  , ceil
+  , cos
+  , exp
+  , floor
+  , log
+  , max
+  , min
+  , pow
+  , remainder, (%)
+  , round
+  , sin
+  , sqrt
+  , tan
+  , trunc
+  , e
+  , ln2
+  , ln10
+  , log10e
+  , log2e
+  , pi
+  , sqrt1_2
+  , sqrt2
+  , tau
   ) where
 
 import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
+import Data.Ord ((<))
 
 -- | Not a number (NaN)
 foreign import nan :: Number
@@ -53,6 +83,74 @@ fromString :: String -> Maybe Number
 fromString str = runFn4 fromStringImpl str isFinite Just Nothing
 
 foreign import fromStringImpl :: Fn4 String (Number -> Boolean) (forall a. a -> Maybe a) (forall a. Maybe a) (Maybe Number)
+
+-- | An alias to make types in this module more explicit.
+type Radians = Number
+
+-- | Returns the absolute value of the argument.
+foreign import abs :: Number -> Number
+
+-- | Returns the inverse cosine of the argument.
+foreign import acos :: Number -> Radians
+
+-- | Returns the inverse sine of the argument.
+foreign import asin :: Number -> Radians
+
+-- | Returns the inverse tangent of the argument.
+foreign import atan :: Number -> Radians
+
+-- | Four-quadrant tangent inverse. Given the arguments `y` and `x`, returns
+-- | the inverse tangent of `y / x`, where the signs of both arguments are used
+-- | to determine the sign of the result.
+-- | If the first argument is negative, the result will be negative.
+-- | The result is the angle between the positive x axis and  a point `(x, y)`.
+foreign import atan2 :: Number -> Number -> Radians
+
+-- | Returns the smallest integer not smaller than the argument.
+foreign import ceil :: Number -> Number
+
+-- | Returns the cosine of the argument.
+foreign import cos :: Radians -> Number
+
+-- | Returns `e` exponentiated to the power of the argument.
+foreign import exp :: Number -> Number
+
+-- | Returns the largest integer not larger than the argument.
+foreign import floor :: Number -> Number
+
+-- | Returns the natural logarithm of a number.
+foreign import log :: Number -> Number
+
+-- | Returns the largest of two numbers.
+foreign import max :: Number -> Number -> Number
+
+-- | Returns the smallest of two numbers.
+foreign import min :: Number -> Number -> Number
+
+-- | Return  the first argument exponentiated to the power of the second argument.
+foreign import pow :: Number -> Number -> Number
+
+-- | Computes the remainder after division, wrapping Javascript's `%` operator.
+foreign import remainder :: Number -> Number -> Number
+
+infixl 7 remainder as %
+
+-- | Returns the integer closest to the argument.
+foreign import round :: Number -> Number
+
+-- | Returns the sine of the argument.
+foreign import sin :: Radians -> Number
+
+-- | Returns the square root of the argument.
+foreign import sqrt :: Number -> Number
+
+-- | Returns the tangent of the argument.
+foreign import tan :: Radians -> Number
+
+-- | Truncates the decimal portion of a number. Equivalent to `floor` if the
+-- | number is positive, and `ceil` if the number is negative.
+trunc :: Number -> Number
+trunc x = if x < 0.0 then ceil x else floor x
 
 -- | The base of natural logarithms, *e*, around 2.71828.
 e :: Number
