@@ -21,6 +21,7 @@ module Data.Number
   , pow
   , remainder, (%)
   , round
+  , sign
   , sin
   , sqrt
   , tan
@@ -137,6 +138,11 @@ infixl 7 remainder as %
 
 -- | Returns the integer closest to the argument.
 foreign import round :: Number -> Number
+
+-- | Returns either a positive or negative +/- 1, indicating the sign of the
+-- | argument. If the argument is 0, it will return a +/- 0. If the argument is
+-- | NaN it will return NaN.
+foreign import sign :: Number -> Number
 
 -- | Returns the sine of the argument.
 foreign import sin :: Radians -> Number
