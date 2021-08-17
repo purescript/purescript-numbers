@@ -9,8 +9,9 @@ Breaking changes:
 New features:
 - Added various functions and constants from `purescript-math`. Specifically,
 `abs`, `acos`, `asin`, `atan`, `atan2`, `ceil`, `cos`, `exp`, `floor`, `log`,
-`max`, `min`, `pow`, `remainder`, `round`, `sin`, `sqrt`, `tan`, `trunc`, `e`,
-`ln2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`, `sqrt2`, and  `tau`
+`max`, `min`, `pow`, `remainder`, `round`, `sign`, `sin`, `sqrt`, `tan`,
+`trunc`, `e`, `ln2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`, `sqrt2`, and
+`tau`
 
 Bugfixes:
 
