@@ -23,8 +23,6 @@ main = do
 -- code was moved into this repo
 globalsTestCode :: Effect Unit
 globalsTestCode = do
-  let num = 12345.6789
-
   log "nan /= nan"
   assert $ nan /= nan
 
@@ -488,7 +486,3 @@ numericsTestCode = do
 
 assertNearlyEqual :: Number -> Number -> Effect Unit
 assertNearlyEqual x y = assert ((abs (x - y)) < 1e-12)
-
-
-
--- `remainder`
