@@ -122,10 +122,12 @@ foreign import floor :: Number -> Number
 -- | Returns the natural logarithm of a number.
 foreign import log :: Number -> Number
 
--- | Returns the largest of two numbers.
+-- | Returns the largest of two numbers. Unlike `max` in Data.Ord this version
+-- | returns NaN if either argument is NaN.
 foreign import max :: Number -> Number -> Number
 
--- | Returns the smallest of two numbers.
+-- | Returns the smallest of two numbers. Unlike `min` in Data.Ord this version
+-- | returns NaN if either argument is NaN.
 foreign import min :: Number -> Number -> Number
 
 -- | Return  the first argument exponentiated to the power of the second argument.
