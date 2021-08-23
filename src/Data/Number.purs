@@ -5,7 +5,6 @@ module Data.Number
   , isNaN
   , infinity
   , isFinite
-  , Radians
   , abs
   , acos
   , asin
@@ -85,33 +84,30 @@ fromString str = runFn4 fromStringImpl str isFinite Just Nothing
 
 foreign import fromStringImpl :: Fn4 String (Number -> Boolean) (forall a. a -> Maybe a) (forall a. Maybe a) (Maybe Number)
 
--- | An alias to make types in this module more explicit.
-type Radians = Number
-
 -- | Returns the absolute value of the argument.
 foreign import abs :: Number -> Number
 
--- | Returns the inverse cosine of the argument.
-foreign import acos :: Number -> Radians
+-- | Returns the inverse cosine in radians of the argument.
+foreign import acos :: Number -> Number
 
--- | Returns the inverse sine of the argument.
-foreign import asin :: Number -> Radians
+-- | Returns the inverse sine in radians of the argument.
+foreign import asin :: Number -> Number
 
--- | Returns the inverse tangent of the argument.
-foreign import atan :: Number -> Radians
+-- | Returns the inverse tangent in radians of the argument.
+foreign import atan :: Number -> Number
 
 -- | Four-quadrant tangent inverse. Given the arguments `y` and `x`, returns
 -- | the inverse tangent of `y / x`, where the signs of both arguments are used
 -- | to determine the sign of the result.
 -- | If the first argument is negative, the result will be negative.
 -- | The result is the angle between the positive x axis and  a point `(x, y)`.
-foreign import atan2 :: Number -> Number -> Radians
+foreign import atan2 :: Number -> Number -> Number
 
 -- | Returns the smallest integer not smaller than the argument.
 foreign import ceil :: Number -> Number
 
--- | Returns the cosine of the argument.
-foreign import cos :: Radians -> Number
+-- | Returns the cosine of the argument, where the argument is in radians.
+foreign import cos :: Number -> Number
 
 -- | Returns `e` exponentiated to the power of the argument.
 foreign import exp :: Number -> Number
@@ -146,14 +142,14 @@ foreign import round :: Number -> Number
 -- | NaN it will return NaN.
 foreign import sign :: Number -> Number
 
--- | Returns the sine of the argument.
-foreign import sin :: Radians -> Number
+-- | Returns the sine of the argument, where the argument is in radians.
+foreign import sin :: Number -> Number
 
 -- | Returns the square root of the argument.
 foreign import sqrt :: Number -> Number
 
--- | Returns the tangent of the argument.
-foreign import tan :: Radians -> Number
+-- | Returns the tangent of the argument, where the argument is in radians.
+foreign import tan :: Number -> Number
 
 -- | Truncates the decimal portion of a number. Equivalent to `floor` if the
 -- | number is positive, and `ceil` if the number is negative.
