@@ -129,7 +129,7 @@ foreign import min :: Number -> Number -> Number
 -- | Return  the first argument exponentiated to the power of the second argument.
 foreign import pow :: Number -> Number -> Number
 
--- | Computes the remainder after division, wrapping Javascript's `%` operator.
+-- | Computes the remainder after division. This is the same as JavaScript's `%` operator.
 foreign import remainder :: Number -> Number -> Number
 
 infixl 7 remainder as %
