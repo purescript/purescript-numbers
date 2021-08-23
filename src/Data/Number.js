@@ -68,11 +68,9 @@ exports.remainder = function (n) {
 
 exports.round = Math.round;
 
-signPolyfill = function(x) {
+exports.sign = Math.sign ? Math.sign : function(x) {
   return x === 0 || x !== x ? x : (x < 0 ? -1 : 1);
-}
-
-exports.sign = Math.sign ? Math.sign : exports.signPolyfill;
+};
 
 exports.sin = Math.sin;
 
