@@ -3,19 +3,21 @@ module Test.Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Number ((%), abs, acos, asin, atan, atan2, ceil, cos, exp, floor,
+fromString, infinity, isFinite, isNaN, ln10, ln2, log10e, log2e, nan, pi, pow,
+round, sign, sin, sqrt, sqrt1_2, sqrt2, tan, tau, trunc)
+import Data.Number (log) as Num
+import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative, eqAbsolute, (≅), (≇))
+import Data.Number.Format (precision, fixed, exponential, toStringWith, toString)
 import Effect (Effect)
 import Effect.Console (log)
-
-import Data.Number (isFinite, infinity,nan, isNaN, fromString)
-import Data.Number.Format (precision, fixed, exponential, toStringWith, toString)
-import Data.Number.Approximate (Fraction(..), Tolerance(..), eqRelative, eqAbsolute, (≅), (≇))
-
 import Test.Assert (assert, assertTrue', assertFalse', assertEqual)
 
 main :: Effect Unit
 main = do
   globalsTestCode
   numbersTestCode
+  numericsTestCode
 
 -- Test code for the `purescript-globals` repo before its' Number-related
 -- code was moved into this repo
@@ -288,3 +290,205 @@ numbersTestCode = do
   log "\teqAbsolute (compare against 0)"
   assertTrue' "should succeed for numbers smaller than the tolerance" $
     0.0 ~= -0.09
+
+numericsTestCode :: Effect Unit
+numericsTestCode = do
+  let pi_4 = pi / 4.0
+  let pi_2 = pi / 2.0
+  let neg_pi = -pi
+
+  log "Data.Number.sin"
+  log "  sin 0.0 = 0.0"
+  sin 0.0 `assertNearlyEqual` 0.0
+
+  log "  sin (pi / 4.0) = sqrt1_2"
+  sin pi_4 `assertNearlyEqual` sqrt1_2
+
+  log "  sin (pi / 2.0) = 1.0"
+  sin pi_2 `assertNearlyEqual` 1.0
+
+  log "  sin pi = 0.0"
+  sin pi `assertNearlyEqual` 0.0
+
+  log "  sin tau = 0.0"
+  sin tau `assertNearlyEqual` 0.0
+
+  log "Data.Number.cos"
+  log "  cos 0.0 = 1.0"
+  cos 0.0 `assertNearlyEqual` 1.0
+
+  log "  cos (pi / 4.0) = sqrt1_2"
+  cos pi_4 `assertNearlyEqual` sqrt1_2
+
+  log "  cos (pi / 2.0) = 0.0"
+  cos pi_2 `assertNearlyEqual` 0.0
+
+  log "  cos pi = -1.0"
+  cos pi `assertNearlyEqual` -1.0
+
+  log "  cos tau = 1.0"
+  cos tau `assertNearlyEqual` 1.0
+
+  log "Data.Number.tan"
+  log "  tan 0.0 = 0.0"
+  tan 0.0 `assertNearlyEqual` 0.0
+
+  log "  tan (pi / 4.0) = 1.0"
+  tan pi_4 `assertNearlyEqual` 1.0
+
+  log "  tan pi = 0.0"
+  tan pi `assertNearlyEqual` 0.0
+
+  log "  tan tau = 0.0"
+  tan tau `assertNearlyEqual` 0.0
+
+  log "Data.Number.asin"
+  log "  asin (sin 0.0) = 0.0"
+  asin (sin 0.0) `assertNearlyEqual` 0.0
+
+  log "  asin (sin pi / 4.0) = pi / 4.0"
+  asin (sin pi_4) `assertNearlyEqual` pi_4
+
+  log "  asin (sin pi / 2.0) = pi / 2.0"
+  asin (sin pi_2) `assertNearlyEqual` pi_2
+
+  log "Data.Number.acos"
+  log "  acos (cos 0.0) = 0.0"
+  acos (cos 0.0) `assertNearlyEqual` 0.0
+
+  log "  acos (cos pi / 4.0) = pi / 4.0"
+  acos (cos pi_4) `assertNearlyEqual` pi_4
+
+  log "  acos (cos pi / 2.0) = pi / 2.0"
+  acos (cos pi_2) `assertNearlyEqual` pi_2
+
+  log "Data.Number.atan"
+  log "  atan (tan 0.0) = 0.0"
+  atan (tan 0.0) `assertNearlyEqual` 0.0
+
+  log "  atan (tan pi / 4.0) = pi / 4.0"
+  atan (tan pi_4) `assertNearlyEqual` pi_4
+
+  log "  atan (tan pi / 2.0) = pi / 2.0"
+  atan (tan pi_2) `assertNearlyEqual` pi_2
+
+  log "Data.Number.atan2"
+  log "  atan2 1.0 2.0 = atan (1.0 / 2.0)"
+  atan2 1.0 2.0 `assertNearlyEqual` atan (1.0 / 2.0)
+
+  log "Data.Number.log"
+  log "  log 2.0 = ln2"
+  Num.log 2.0 `assertNearlyEqual` ln2
+
+  log "  log 10.0 = ln10"
+  Num.log 10.0 `assertNearlyEqual` ln10
+
+  log "Data.Number.exp"
+  log "  exp ln2 = 2.0"
+  exp ln2 `assertNearlyEqual` 2.0
+
+  log "  exp ln10 = 10.0"
+  exp ln10 `assertNearlyEqual` 10.0
+
+  log "Data.Number.abs"
+  log "  abs pi = pi"
+  assert $ abs pi == pi
+
+  log "  abs (-pi) = pi"
+  assert $ abs neg_pi == pi
+
+  log "Data.Number.sign"
+  log "  sign pi = 1.0"
+  assert $ sign pi == 1.0
+
+  log "  sign (-pi) = -1.0"
+  assert $ sign neg_pi == -1.0
+
+  log "Data.Number.sqrt"
+  log "  sqrt 2.0 = sqrt2"
+  sqrt 2.0 `assertNearlyEqual` sqrt2
+
+  log "  sqrt (1.0 / 2.0) = sqrt1_2"
+  sqrt (1.0 / 2.0) `assertNearlyEqual` sqrt1_2
+
+  log "Data.Number.pow"
+  log "  2.0 `pow` (1.0 / 2.0) = sqrt2"
+  (2.0 `pow` (1.0 / 2.0)) `assertNearlyEqual` sqrt2
+
+  log "Data.Number.min"
+  log "  min 0.0 1.0 = 0.0"
+  assert $ min 0.0 1.0 == 0.0
+
+  log "Data.Number.max"
+  log "  max 0.0 1.0 = 1.0"
+  assert $ max 0.0 1.0 == 1.0
+
+  log "Data.Number rounding"
+  log "  ceil 4.7 = 5.0"
+  assert $ ceil 4.7 == 5.0
+
+  log "  floor 4.7 = 4.0"
+  assert $ floor 4.7 == 4.0
+
+  log "  round 4.7 = 5.0"
+  assert $ round 4.7 == 5.0
+
+  log "  trunc 4.7 = 4.0"
+  assert $ trunc 4.7 == 4.0
+
+  log "  ceil (-4.7) = -4.0"
+  assert $ ceil (-4.7) == -4.0
+
+  log "  floor (-4.7) = -5.0"
+  assert $ floor (-4.7) == -5.0
+
+  log "  round (-4.7) = -5.0"
+  assert $ round (-4.7) == -5.0
+
+  log "  trunc (-4.7) = -4.0"
+  assert $ trunc (-4.7) == -4.0
+
+  log "  ceil 4.3 = 5.0"
+  assert $ ceil 4.3 == 5.0
+
+  log "  floor 4.3 = 4.0"
+  assert $ floor 4.3 == 4.0
+
+  log "  round 4.3 = 4.0"
+  assert $ round 4.3 == 4.0
+
+  log "  trunc 4.3 = 4.0"
+  assert $ trunc 4.3 == 4.0
+
+  log "  ceil (-4.3) = -4.0"
+  assert $ ceil (-4.3) == -4.0
+
+  log "  floor (-4.3) = -5.0"
+  assert $ floor (-4.3) == -5.0
+
+  log "  round (-4.3) = -4.0"
+  assert $ round (-4.3) == -4.0
+
+  log "  trunc (-4.3) = -4.0"
+  assert $ trunc (-4.3) == -4.0
+
+  log "Data.Number.remainder (%)"
+  log "  12.0 % 5.0 = 2.0"
+  assert $ 12.0 % 5.0 == 2.0
+
+  log "  (-12.0) % 5.0 = 2.0"
+  assert $ (-12.0) % 5.0 == -2.0
+
+  log "Data.Number constants"
+  log "  log10e = 1.0 / ln10"
+  log10e `assertNearlyEqual` (1.0 / ln10)
+
+  log "  log2e = 1.0 / ln2"
+  log2e `assertNearlyEqual` (1.0 / ln2)
+
+assertNearlyEqual :: Number -> Number -> Effect Unit
+assertNearlyEqual x y = assert ((abs (x - y)) < 1e-12)
+
+
+
+-- `remainder`
