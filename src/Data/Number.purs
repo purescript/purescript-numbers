@@ -129,7 +129,7 @@ foreign import min :: Number -> Number -> Number
 -- | Return  the first argument exponentiated to the power of the second argument.
 foreign import pow :: Number -> Number -> Number
 
--- | Computes the remainder after division, wrapping Javascript's `%` operator.
+-- | Computes the remainder after division. This is the same as JavaScript's `%` operator.
 foreign import remainder :: Number -> Number -> Number
 
 infixl 7 remainder as %
@@ -180,7 +180,7 @@ log2e = 1.4426950408889634
 pi :: Number
 pi = 3.141592653589793
 
--- | The Square root of one half, around 0.707107.
+-- | The square root of one half, around 0.707107.
 sqrt1_2 :: Number
 sqrt1_2 = 0.7071067811865476
 
