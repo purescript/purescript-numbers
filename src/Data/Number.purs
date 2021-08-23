@@ -180,7 +180,7 @@ log2e = 1.4426950408889634
 pi :: Number
 pi = 3.141592653589793
 
--- | The Square root of one half, around 0.707107.
+-- | The square root of one half, around 0.707107.
 sqrt1_2 :: Number
 sqrt1_2 = 0.7071067811865476
 
