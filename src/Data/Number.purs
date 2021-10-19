@@ -1,14 +1,24 @@
 -- | Functions for working with PureScripts builtin `Number` type.
 module Data.Number
   ( fromString
+  , epsilon
   , nan
   , isNaN
   , infinity
+  , negativeInfinity
   , isFinite
+  , minValue
+  , maxValue
   ) where
 
 import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
+
+-- | The `Number` value for the magnitude of the difference between 1 and
+-- | the smallest value greater than 1 that is representable as a 
+-- | `Number` value, which is approximately 
+-- | 2.2204460492503130808472633361816 × 10⁻¹⁶
+foreign import epsilon :: Number
 
 -- | Not a number (NaN)
 foreign import nan :: Number
@@ -16,8 +26,11 @@ foreign import nan :: Number
 -- | Test whether a number is NaN
 foreign import isNaN :: Number -> Boolean
 
--- | Positive infinity
+-- | Positive infinity, +∞𝔽
 foreign import infinity :: Number
+
+-- | Negative inifinity, -∞𝔽
+foreign import negativeInfinity :: Number
 
 -- | Test whether a number is finite
 foreign import isFinite :: Number -> Boolean
@@ -53,3 +66,11 @@ fromString :: String -> Maybe Number
 fromString str = runFn4 fromStringImpl str isFinite Just Nothing
 
 foreign import fromStringImpl :: Fn4 String (Number -> Boolean) (forall a. a -> Maybe a) (forall a. Maybe a) (Maybe Number)
+
+-- | The largest positive finite value of the `Number` type, which is 
+-- | approximately 1.7976931348623157 × 10³⁰⁸
+foreign import maxValue :: Number
+
+-- | The smallest positive value of the `Number` type, which is 
+-- | approximately 5 × 10⁻³²⁴
+foreign import minValue :: Number

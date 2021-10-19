@@ -7,6 +7,7 @@ Notable changes to this project are documented in this file. The format is based
 Breaking changes:
 
 New features:
+- Added `epsilon`, `negativeInfinity`, `maxValue`, and `minValue` from JavaScript’s `Number` properties (#19 by @toastal)
 
 Bugfixes:
 
