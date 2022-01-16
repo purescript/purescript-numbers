@@ -125,22 +125,22 @@ foreign import abs :: Number -> Number
 
 -- | Returns the inverse cosine in radians of the argument.
 -- | ```purs
--- | > acos 0.0 - pi / 2.0
--- | 0.0
+-- | > acos 0.0 == pi / 2.0
+-- | true
 -- | ```
 foreign import acos :: Number -> Number
 
 -- | Returns the inverse sine in radians of the argument.
 -- | ```purs
--- | > asin 0.0
--- | 0.0
+-- | > asin 1.0 == pi / 2.0
+-- | true
 -- | ```
 foreign import asin :: Number -> Number
 
 -- | Returns the inverse tangent in radians of the argument.
 -- | ```purs
--- | > atan 0.0
--- | 0.0
+-- | > atan 1.0 == pi / 4.0
+-- | true
 -- | ```
 foreign import atan :: Number -> Number
 
@@ -152,6 +152,8 @@ foreign import atan :: Number -> Number
 -- | ```purs
 -- | > atan2 0.0 1.0
 -- | 0.0
+-- | > atan2 1.0 0.0 == pi / 2.0
+-- | true
 -- | ```
 foreign import atan2 :: Number -> Number -> Number
 
@@ -164,8 +166,8 @@ foreign import ceil :: Number -> Number
 
 -- | Returns the cosine of the argument, where the argument is in radians.
 -- | ```purs
--- | > cos 0.0
--- | 1.0
+-- | > cos (pi / 4.0) == sqrt2 / 2.0
+-- | true
 -- | ```
 foreign import cos :: Number -> Number
 
@@ -235,8 +237,8 @@ foreign import sign :: Number -> Number
 
 -- | Returns the sine of the argument, where the argument is in radians.
 -- | ```purs
--- | > sin 0.0
--- | 0.0
+-- | > sin (pi / 2.0)
+-- | 1.0
 -- | ```
 foreign import sin :: Number -> Number
 
@@ -249,8 +251,8 @@ foreign import sqrt :: Number -> Number
 
 -- | Returns the tangent of the argument, where the argument is in radians.
 -- | ```
--- | > tan 0.0
--- | 0.0
+-- | > tan (pi / 4.0)
+-- | 0.9999999999999999
 -- | ```
 foreign import tan :: Number -> Number
 
