@@ -1,19 +1,14 @@
 /* globals exports */
-"use strict";
+export {NaN as nan};
+export {isNaN};
+export {Infinity as infinity};
+export {isFinite};
 
-exports.nan = NaN;
-
-exports.isNaN = isNaN;
-
-exports.infinity = Infinity;
-
-exports.isFinite = isFinite;
-
-exports.fromStringImpl = function(str, isFinite, just, nothing) {
+export function fromStringImpl(str, isFinite, just, nothing) {
   var num = parseFloat(str);
   if (isFinite(num)) {
     return just(num);
   } else {
     return nothing;
   }
-};
+}
