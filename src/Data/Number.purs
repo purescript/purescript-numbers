@@ -38,7 +38,6 @@ module Data.Number
 
 import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
-import Data.Ord ((<))
 
 -- | Not a number (NaN).
 -- | ```purs
@@ -262,8 +261,7 @@ foreign import tan :: Number -> Number
 -- | ceil 1.5
 -- | 2.0
 -- | ```
-trunc :: Number -> Number
-trunc x = if x < 0.0 then ceil x else floor x
+foreign import trunc :: Number -> Number
 
 -- | The base of the natural logarithm, also known as Euler's number or *e*.
 -- | ```purs
