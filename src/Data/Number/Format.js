@@ -6,7 +6,7 @@ function wrap(method) {
   };
 }
 
-export var toPrecisionNative = wrap(Number.prototype.toPrecision);
-export var toFixedNative = wrap(Number.prototype.toFixed);
-export var toExponentialNative = wrap(Number.prototype.toExponential);
+export const toPrecisionNative = wrap(Number.prototype.toPrecision);
+export const toFixedNative = wrap(Number.prototype.toFixed);
+export const toExponentialNative = wrap(Number.prototype.toExponential);
 export function toString(num) { return num.toString(); }
