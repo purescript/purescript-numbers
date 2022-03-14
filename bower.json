@@ -16,12 +16,12 @@
     "output"
   ],
   "dependencies": {
-    "purescript-functions": "^5.0.0",
-    "purescript-math": "^3.0.0",
-    "purescript-maybe": "^5.0.0"
+    "purescript-functions": "master",
+    "purescript-math": "master",
+    "purescript-maybe": "master"
   },
   "devDependencies": {
-    "purescript-assert": "^5.0.0",
-    "purescript-console": "^5.0.0"
+    "purescript-assert": "master",
+    "purescript-console": "master"
   }
 }
