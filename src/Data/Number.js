@@ -1,8 +1,10 @@
 /* globals exports */
 export const nan = NaN;
-export const isNaN = isNaN;
+const isNaNImpl = isNaN;
+export { isNaNImpl as isNaN };
 export const infinity = Infinity;
-export const isFinite = isFinite;
+const isFiniteImpl = isFinite;
+export { isFiniteImpl as isFinite };
 
 export function fromStringImpl(str, isFinite, just, nothing) {
   var num = parseFloat(str);
