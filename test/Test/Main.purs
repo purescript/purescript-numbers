@@ -21,8 +21,6 @@ main = do
 -- code was moved into this repo
 globalsTestCode :: Effect Unit
 globalsTestCode = do
-  let num = 12345.6789
-
   log "nan /= nan"
   assert $ nan /= nan
 
