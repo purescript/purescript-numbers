@@ -1,83 +1,80 @@
 /* globals exports */
-"use strict";
+export const nan = NaN;
+const isNaNImpl = isNaN;
+export { isNaNImpl as isNaN };
+export const infinity = Infinity;
+const isFiniteImpl = isFinite;
+export { isFiniteImpl as isFinite };
 
-exports.nan = NaN;
-
-exports.isNaN = isNaN;
-
-exports.infinity = Infinity;
-
-exports.isFinite = isFinite;
-
-exports.fromStringImpl = function(str, isFinite, just, nothing) {
+export function fromStringImpl(str, isFinite, just, nothing) {
   var num = parseFloat(str);
   if (isFinite(num)) {
     return just(num);
   } else {
     return nothing;
   }
-};
+}
 
-exports.abs = Math.abs;
+export const abs = Math.abs;
 
-exports.acos = Math.acos;
+export const acos = Math.acos;
 
-exports.asin = Math.asin;
+export const asin = Math.asin;
 
-exports.atan = Math.atan;
+export const atan = Math.atan;
 
-exports.atan2 = function (y) {
+export const atan2 = function (y) {
   return function (x) {
     return Math.atan2(y, x);
   };
 };
 
-exports.ceil = Math.ceil;
+export const ceil = Math.ceil;
 
-exports.cos = Math.cos;
+export const cos = Math.cos;
 
-exports.exp = Math.exp;
+export const exp = Math.exp;
 
-exports.floor = Math.floor;
+export const floor = Math.floor;
 
-exports.log = Math.log;
+export const log = Math.log;
 
-exports.max = function (n1) {
+export const max = function (n1) {
   return function (n2) {
     return Math.max(n1, n2);
   };
 };
 
-exports.min = function (n1) {
+export const min = function (n1) {
   return function (n2) {
     return Math.min(n1, n2);
   };
 };
 
-exports.pow = function (n) {
+export const pow = function (n) {
   return function (p) {
     return Math.pow(n, p);
   };
 };
 
-exports.remainder = function (n) {
+export const remainder = function (n) {
   return function (m) {
     return n % m;
   };
 };
 
-exports.round = Math.round;
+export const round = Math.round;
 
-exports.sign = Math.sign ? Math.sign : function(x) {
+export const sign = Math.sign ? Math.sign : function(x) {
   return x === 0 || x !== x ? x : (x < 0 ? -1 : 1);
 };
 
-exports.sin = Math.sin;
+export const sin = Math.sin;
 
-exports.sqrt = Math.sqrt;
+export const sqrt = Math.sqrt;
 
-exports.tan = Math.tan;
+export const tan = Math.tan;
 
-exports.trunc = Math.trunc ? Math.trunc : function(x) {
+export const trunc = Math.trunc ? Math.trunc : function(x) {
   return x < 0 ? Math.ceil(x) : Math.floor(x);
 }
