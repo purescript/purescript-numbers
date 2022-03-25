@@ -7,11 +7,16 @@ Notable changes to this project are documented in this file. The format is based
 Breaking changes:
 
 New features:
-- Added various functions and constants from `purescript-math` (#18). Specifically,
-`abs`, `acos`, `asin`, `atan`, `atan2`, `ceil`, `cos`, `exp`, `floor`, `log`,
-`max`, `min`, `pow`, `remainder`, `round`, `sign`, `sin`, `sqrt`, `tan`,
-`trunc`, `e`, `ln2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`, `sqrt2`, and
-`tau`
+- Ported various functions & constants from `purescript-math` (#18 by @JamieBallingall)
+
+  Specifically...
+  - `abs`, `sign`
+  - `max`, `min` (which work differently than `Number`'s `Ord` instance)
+  - `ceil`, `floor`, `trunc`, `remainder`, `round`
+  - `log`, `ln2`, `ln10`, `log10e`, `log2e`
+  - `exp`, `pow`, `sqrt`, `sqrt1_2`, `sqrt2`
+  - `acos`, `asin`, `atan`, `atan2`, `cos`, `sin`, `tan`
+  - `e`, `pi`, `tau`
 
 Bugfixes:
 
