@@ -172,8 +172,8 @@ foreign import cos :: Number -> Number
 
 -- | Returns `e` exponentiated to the power of the argument.
 -- | ```purs
--- | > exp 0.0
--- | 1.0
+-- | > exp 1.0
+-- | 2.718281828459045
 -- | ```
 foreign import exp :: Number -> Number
 
@@ -186,8 +186,8 @@ foreign import floor :: Number -> Number
 
 -- | Returns the natural logarithm of a number.
 -- | ```purs
--- | > log 1.0
--- | 0.0
+-- | > log e
+-- | 1.0
 foreign import log :: Number -> Number
 
 -- | Returns the largest of two numbers. Unlike `max` in Data.Ord this version
