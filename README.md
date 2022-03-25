@@ -12,52 +12,23 @@ Utility functions for working with PureScripts builtin `Number` type.
 spago install numbers
 ```
 
-## Examples
+## Scope
 
-Parsing:
-
-```purs
-> fromString "12.34"
-(Just 12.34)
-
-> fromString "1e-3"
-(Just 0.001)
-```
-
-Formatting (`Data.Number.Format`):
-
-```purs
-> let x = 1234.56789
-
-> toStringWith (precision 6) x
-"1234.57"
-
-> toStringWith (fixed 3) x
-"1234.568"
-
-> toStringWith (exponential 2) x
-"1.23e+3"
-```
-
-Approximate comparisons (`Data.Number.Approximate`):
-
-```purs
-> 0.1 + 0.2 == 0.3
-false
-
-> 0.1 + 0.2 ≅ 0.3
-true
-```
-
-_NaN_ and _infinity_:
-
-```purs
-> isNaN (Math.asin 2.0)
-true
-
-> isFinite (1.0 / 0.0)
-false
-```
+* Parsing with `fromString`
+* Formating with `toStringWith`, see `Data.Number.Format`
+* Approximate comparisions with `≅`, see `Data.Number.Approximate`
+* Not-a-number and infinite value detection with `isNaN` and `isFinite`
+* Remainder with `%`
+* Trignometric functions with `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, and
+  `atan2`
+* Natural logarithm and exponents with `log` and `exp`
+* Powers with `sqrt` and `pow`
+* Rounding with `ceil`, `floor`, `round`, and `trunc`
+* Numeric minimum and maximum with `min` and `max`, which behave differently to
+  the versions in `Data.Ord` on values of `NaN`
+* Sign and absolute value functions `sign` and `abs`
+* Numeric constants `e`, `ln 2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`,
+  `sqrt2`, and `tau`
 
 ## Documentation
 

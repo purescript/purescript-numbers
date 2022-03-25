@@ -13,7 +13,7 @@ module Data.Number.Approximate
 
 import Prelude
 
-import Math (abs)
+import Data.Number (abs)
 
 -- | A newtype for (small) numbers, typically in the range *[0:1]*. It is used
 -- | as an argument for `eqRelative`.
@@ -93,4 +93,3 @@ newtype Tolerance = Tolerance Number
 -- | ```
 eqAbsolute :: Tolerance -> Number -> Number -> Boolean
 eqAbsolute (Tolerance tolerance) x y = abs (x - y) <= tolerance
-

@@ -7,10 +7,22 @@ Notable changes to this project are documented in this file. The format is based
 Breaking changes:
 
 New features:
+- Ported various functions & constants from `purescript-math` (#18 by @JamieBallingall)
+
+  Specifically...
+  - `abs`, `sign`
+  - `max`, `min` (which work differently than `Number`'s `Ord` instance)
+  - `ceil`, `floor`, `trunc`, `remainder`/`%`, `round`
+  - `log`
+  - `exp`, `pow`, `sqrt`
+  - `acos`, `asin`, `atan`, `atan2`, `cos`, `sin`, `tan`
+  - Numeric constants: `e`, `ln2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`,
+  `sqrt2`, and `tau`
 
 Bugfixes:
 
 Other improvements:
+- Removed dependency on `purescript-math`
 
 ## [v8.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v7.0.0) - 2021-02-26
 

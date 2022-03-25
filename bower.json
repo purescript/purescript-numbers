@@ -17,7 +17,6 @@
   ],
   "dependencies": {
     "purescript-functions": "master",
-    "purescript-math": "master",
     "purescript-maybe": "master"
   },
   "devDependencies": {
