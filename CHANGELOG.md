@@ -12,11 +12,12 @@ New features:
   Specifically...
   - `abs`, `sign`
   - `max`, `min` (which work differently than `Number`'s `Ord` instance)
-  - `ceil`, `floor`, `trunc`, `remainder`, `round`
-  - `log`, `ln2`, `ln10`, `log10e`, `log2e`
-  - `exp`, `pow`, `sqrt`, `sqrt1_2`, `sqrt2`
+  - `ceil`, `floor`, `trunc`, `remainder`/`%`, `round`
+  - `log`
+  - `exp`, `pow`, `sqrt`
   - `acos`, `asin`, `atan`, `atan2`, `cos`, `sin`, `tan`
-  - `e`, `pi`, `tau`
+  - Numeric constants: `e`, `ln2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`,
+  `sqrt2`, and `tau`
 
 Bugfixes:
 
