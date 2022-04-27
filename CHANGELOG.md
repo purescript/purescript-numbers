@@ -7,6 +7,17 @@ Notable changes to this project are documented in this file. The format is based
 Breaking changes:
 
 New features:
+
+Bugfixes:
+
+Other improvements:
+
+## [v9.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v9.0.0) - 2022-04-27
+
+Breaking changes:
+- Add support for PureScript 0.15 (#22 by @JordanMartinez)
+
+New features:
 - Ported various functions & constants from `purescript-math` (#18 by @JamieBallingall)
 
   Specifically...
