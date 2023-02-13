@@ -11,6 +11,10 @@ New features:
 Bugfixes:
 
 Other improvements:
+
+## [v9.0.1](https://github.com/purescript/purescript-numbers/releases/tag/v9.0.1) - 2023-02-13
+
+Other improvements:
 - Add LICENSE file (#26 by @mhmdanas)
 
 ## [v9.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v9.0.0) - 2022-04-27
