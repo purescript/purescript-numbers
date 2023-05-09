@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), fromMaybe)
-import Data.Number ((%), abs, acos, asin, atan, atan2, ceil, cos, exp, floor, fromString, infinity, isFinite, isNaN, ln10, ln2, log10e, log2e, nan, pi, pow, round, sign, sin, sqrt, sqrt1_2, sqrt2, tan, tau, trunc)
+import Data.Number ((%), abs, acos, asin, atan, atan2, ceil, cos, epsilon, exp, floor, fromString, infinity, isFinite, isNaN, ln10, ln2, log10e, log2e, minPosNumber, maxNumber, nan, pi, pow, round, sign, sin, sqrt, sqrt1_2, sqrt2, tan, tau, trunc)
 import Data.Number (log) as Num
 import Data.Number.Approximate (Fraction(..), Tolerance(..), eqAbsolute, eqRelative, (≅), (≇))
 import Data.Number.Format (precision, fixed, exponential, toStringWith, toString)
@@ -41,6 +41,18 @@ globalsTestCode = do
 
   log "isFinite 0.0"
   assert $ isFinite 0.0
+
+  log "epsilon equals 2^-52"
+  assert $ epsilon == 2.0 `pow` (-52.0)
+
+  log "minPosNumber equals 2^-1074"
+  assert $ minPosNumber == 2.0 `pow` (-1074.0)
+
+  log "The sign of minPosNumber is 1.0"
+  assert $ sign minPosNumber == 1.0
+
+  log "maxNumber equals 2^1023 * (1 + (1 - 2^-52))"
+  assert $ maxNumber == (2.0 `pow` 1023.0) * (1.0 + (1.0 - 2.0 `pow` (-52.0)))
 
 -- Test code originally in this repo before parts of deprecated
 -- `purescript-globals` repo was moved to this repo.

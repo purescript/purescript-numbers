@@ -1,10 +1,14 @@
--- | Functions for working with PureScripts builtin `Number` type.
+-- | Functions for working with PureScript's builtin `Number` type. A `Number`
+-- | is a double precision floating point number (IEEE 754 binary64).
 module Data.Number
   ( fromString
   , nan
   , isNaN
   , infinity
   , isFinite
+  , epsilon
+  , minPosNumber
+  , maxNumber
   , abs
   , acos
   , asin
@@ -81,6 +85,34 @@ foreign import infinity :: Number
 -- | false
 -- | ```
 foreign import isFinite :: Number -> Boolean
+
+-- | Machine epsilon according to the "widespread variant definition". That is
+-- | the difference between 1.0 and the next larger `Number`.
+-- | ```purs
+-- | > epsilon == 2.0 `pow` (-52.0)
+-- | true
+-- | ```
+epsilon :: Number
+epsilon = 2.220446049250313e-16
+
+-- | The smallest positive `Number`.
+-- | ```purs
+-- | > minNumber == 2.0 `pow` (-1074.0)
+-- | true
+-- |
+-- | > sign minNumber
+-- | 1.0
+-- | ```
+minPosNumber :: Number
+minPosNumber = 5e-324
+
+-- | The largest finite `Number`.
+-- | ```
+-- | > maxNumber == (2.0 `pow` 1023.0) * (1.0 + (1.0 - 2.0 `pow` (-52.0)))
+-- | true
+-- | ```
+maxNumber :: Number
+maxNumber = 1.7976931348623157e+308
 
 -- | Attempt to parse a `Number` using JavaScripts `parseFloat`. Returns
 -- | `Nothing` if the parse fails or if the result is not a finite number.
