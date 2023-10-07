@@ -136,11 +136,11 @@ numbersTestCode = do
     }
   assertEqual
     { expected: "3"
-    , actual: toStringWith (precision 0) pi
+    , actual: toStringWith (fixed 0) pi
     }
   assertEqual
     { expected: "3"
-    , actual: toStringWith (precision (-3)) pi
+    , actual: toStringWith (fixed (-3)) pi
     }
   assertEqual
     { expected: "1234.5"
