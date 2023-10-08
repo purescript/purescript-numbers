@@ -15,6 +15,7 @@ module Data.Number
   , exp
   , floor
   , log
+  , logBase
   , max
   , min
   , pow
@@ -36,6 +37,7 @@ module Data.Number
   , tau
   ) where
 
+import Data.EuclideanRing ((/))
 import Data.Function.Uncurried (Fn4, runFn4)
 import Data.Maybe (Maybe(..))
 
@@ -189,6 +191,13 @@ foreign import floor :: Number -> Number
 -- | > log e
 -- | 1.0
 foreign import log :: Number -> Number
+
+-- | Returns the logarithm of a number with a given base
+-- | ```purs
+-- | > logBase 2.0 8.0
+-- | 3.0
+logBase :: Number -> Number -> Number
+logBase base number = log number / log base
 
 -- | Returns the largest of two numbers. Unlike `max` in Data.Ord this version
 -- | returns NaN if either argument is NaN.
