@@ -1,4 +1,3 @@
-/* globals exports */
 export const nan = NaN;
 const isNaNImpl = isNaN;
 export { isNaNImpl as isNaN };
