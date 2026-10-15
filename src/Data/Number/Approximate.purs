@@ -42,9 +42,9 @@ newtype Fraction = Fraction Number
 -- | true
 -- | ```
 eqRelative :: Fraction -> Number -> Number -> Boolean
-eqRelative (Fraction frac) 0.0   y =       abs y <= frac
-eqRelative (Fraction frac)   x 0.0 =       abs x <= frac
-eqRelative (Fraction frac)   x   y = abs (x - y) <= frac * abs (x + y) / 2.0
+eqRelative (Fraction frac) 0.0 y = abs y <= frac
+eqRelative (Fraction frac) x 0.0 = abs x <= frac
+eqRelative (Fraction frac) x y = abs (x - y) <= frac * abs (x + y) / 2.0
 
 -- | Test if two numbers are approximately equal, up to a relative difference
 -- | of one part in a million:
@@ -63,8 +63,8 @@ eqRelative (Fraction frac)   x   y = abs (x - y) <= frac * abs (x + y) / 2.0
 eqApproximate :: Number -> Number -> Boolean
 eqApproximate = eqRelative onePPM
   where
-    onePPM :: Fraction
-    onePPM = Fraction 1.0e-6
+  onePPM :: Fraction
+  onePPM = Fraction 1.0e-6
 
 infix 4 eqApproximate as ~=
 infix 4 eqApproximate as ≅

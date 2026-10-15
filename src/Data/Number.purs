@@ -18,7 +18,8 @@ module Data.Number
   , max
   , min
   , pow
-  , remainder, (%)
+  , remainder
+  , (%)
   , round
   , sign
   , sin

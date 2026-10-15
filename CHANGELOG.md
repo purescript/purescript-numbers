@@ -11,14 +11,17 @@ Other improvements:
 ## [v9.0.1](https://github.com/purescript/purescript-numbers/releases/tag/v9.0.1) - 2023-02-13
 
 Other improvements:
+
 - Add LICENSE file (#26 by @mhmdanas)
 
 ## [v9.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v9.0.0) - 2022-04-27
 
 Breaking changes:
+
 - Add support for PureScript 0.15 (#22 by @JordanMartinez)
 
 New features:
+
 - Ported various functions & constants from `purescript-math` (#18 by @JamieBallingall)
 
   Specifically...
@@ -29,22 +32,26 @@ New features:
   - `exp`, `pow`, `sqrt`
   - `acos`, `asin`, `atan`, `atan2`, `cos`, `sin`, `tan`
   - Numeric constants: `e`, `ln2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`,
-  `sqrt2`, and `tau`
+    `sqrt2`, and `tau`
 
 Bugfixes:
 
 Other improvements:
+
 - Removed dependency on `purescript-math`
 
 ## [v8.0.0](https://github.com/purescript/purescript-numbers/releases/tag/v7.0.0) - 2021-02-26
 
 Breaking changes:
+
 - Added support for PureScript 0.14 and dropped support for all previous versions (#11)
 
 New features:
+
 - Ported `Number`-related code from deprecated `purescript-globals` into this repo (#12)
 
 Other improvements:
+
 - Replaced unicode symbols with ascii characters (#11)
 - Migrated tests to use `assert` instead of `test-unit` (#10)
 - Migrated CI to GitHub Actions and updated installation instructions to use Spago (#13)
