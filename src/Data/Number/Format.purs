@@ -57,9 +57,10 @@ exponential = Exponential <<< clamp 0 20
 
 -- | Convert a number to a string with a given format.
 toStringWith :: Format -> Number -> String
-toStringWith (Precision p) = toPrecisionNative p
-toStringWith (Fixed p) = toFixedNative p
-toStringWith (Exponential p) = toExponentialNative p
+toStringWith format = case format of
+  Precision p -> toPrecisionNative p
+  Fixed p -> toFixedNative p
+  Exponential p -> toExponentialNative p
 
 -- | Convert a number to a string via JavaScript's toString method.
 -- |
