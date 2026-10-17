@@ -18,7 +18,8 @@ module Data.Number
   , max
   , min
   , pow
-  , remainder, (%)
+  , remainder
+  , (%)
   , round
   , sign
   , sin
@@ -188,6 +189,7 @@ foreign import floor :: Number -> Number
 -- | ```purs
 -- | > log e
 -- | 1.0
+-- | ```
 foreign import log :: Number -> Number
 
 -- | Returns the largest of two numbers. Unlike `max` in Data.Ord this version

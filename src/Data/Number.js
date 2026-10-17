@@ -1,4 +1,3 @@
-/* globals exports */
 export const nan = NaN;
 const isNaNImpl = isNaN;
 export { isNaNImpl as isNaN };
@@ -65,9 +64,11 @@ export const remainder = function (n) {
 
 export const round = Math.round;
 
-export const sign = Math.sign ? Math.sign : function(x) {
-  return x === 0 || x !== x ? x : (x < 0 ? -1 : 1);
-};
+export const sign = Math.sign
+  ? Math.sign
+  : function (x) {
+      return x === 0 || x !== x ? x : x < 0 ? -1 : 1;
+    };
 
 export const sin = Math.sin;
 
@@ -75,6 +76,8 @@ export const sqrt = Math.sqrt;
 
 export const tan = Math.tan;
 
-export const trunc = Math.trunc ? Math.trunc : function(x) {
-  return x < 0 ? Math.ceil(x) : Math.floor(x);
-}
+export const trunc = Math.trunc
+  ? Math.trunc
+  : function (x) {
+      return x < 0 ? Math.ceil(x) : Math.floor(x);
+    };

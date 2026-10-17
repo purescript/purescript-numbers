@@ -1,0 +1,25 @@
+package:
+  name: numbers
+  description: Functions for working with Numbers
+  build:
+    strict: true
+    pedanticPackages: true
+  publish:
+    version: 9.0.2
+    license: BSD-3-Clause AND MIT
+    location:
+      githubOwner: purescript
+      githubRepo: purescript-numbers
+  dependencies:
+    - functions: ">=6.0.0 <7.0.0"
+    - maybe: ">=6.0.0 <7.0.0"
+    - prelude: ">=6.0.0 <7.0.0"
+  test:
+    main: Test.Main
+    strict: true
+    pedanticPackages: true
+    dependencies:
+      - assert: ">=6.0.0 <7.0.0"
+      - console: ">=6.0.0 <7.0.0"
+      - effect: ">=4.0.0 <5.0.0"
+workspace: {}
