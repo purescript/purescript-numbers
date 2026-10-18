@@ -14,20 +14,20 @@ spago install numbers
 
 ## Scope
 
-* Parsing with `fromString`
-* Formating with `toStringWith`, see `Data.Number.Format`
-* Approximate comparisions with `≅`, see `Data.Number.Approximate`
-* Not-a-number and infinite value detection with `isNaN` and `isFinite`
-* Remainder with `%`
-* Trignometric functions with `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, and
+- Parsing with `fromString`
+- Formating with `toStringWith`, see `Data.Number.Format`
+- Approximate comparisions with `≅`, see `Data.Number.Approximate`
+- Not-a-number and infinite value detection with `isNaN` and `isFinite`
+- Remainder with `%`
+- Trignometric functions with `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, and
   `atan2`
-* Natural logarithm and exponents with `log` and `exp`
-* Powers with `sqrt` and `pow`
-* Rounding with `ceil`, `floor`, `round`, and `trunc`
-* Numeric minimum and maximum with `min` and `max`, which behave differently to
+- Natural logarithm and exponents with `log` and `exp`
+- Powers with `sqrt` and `pow`
+- Rounding with `ceil`, `floor`, `round`, and `trunc`
+- Numeric minimum and maximum with `min` and `max`, which behave differently to
   the versions in `Data.Ord` on values of `NaN`
-* Sign and absolute value functions `sign` and `abs`
-* Numeric constants `e`, `ln 2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`,
+- Sign and absolute value functions `sign` and `abs`
+- Numeric constants `e`, `ln 2`, `ln10`, `log10e`, `log2e`, `pi`, `sqrt1_2`,
   `sqrt2`, and `tau`
 
 ## Documentation

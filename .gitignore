@@ -4,3 +4,6 @@
 /output/
 /.psci*
 /src/.webpack.js
+/.spago/
+/package-lock.json
+/spago.lock
